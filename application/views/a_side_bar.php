@@ -6,14 +6,22 @@
       </a>
 
       <div class="list-group list-group-flush">
-        <a href="dashboard" class="list-group-item active waves-effect">
+        <a href="dashboard" 
+            class="list-group-item list-group-item-action <?php if($this->uri->segment(2)=="dashboard"){echo "active";}?> waves-effect">
           <i class="fas fa-chart-pie mr-3" ></i>Dashboard
         </a>
-        <a href="<?php echo base_url(). 'index.php/admin/profil'; ?>" class="list-group-item list-group-item-action waves-effect">
+        <a href="<?php echo base_url(). 'index.php/admin/profil'; ?>" 
+            class="list-group-item  list-group-item-action <?php if($this->uri->segment(2)=="profil"){echo "active";}?> waves-effect">
           <i class="far fa-id-badge mr-3"></i>Profile</a>
-        <a href="<?php echo base_url(). 'index.php/admin/index'; ?>" class="list-group-item list-group-item-action waves-effect">
+        
+        <?php 
+          if($this->session->userdata('is') =="admin"){         ?>
+            <a href="<?php echo base_url(). 'index.php/admin/index'; ?>" 
+              class="list-group-item list-group-item-action <?php if($this->uri->segment(2)=="index"){echo "active";}?> waves-effect">
           <i class="fas fa-users mr-3"></i>User</a>
-        <a href="<?php echo base_url(). 'index.php/admin/indexU'; ?>" class="list-group-item list-group-item-action waves-effect">
+        <?php } ?>
+        <a href="<?php echo base_url(). 'index.php/admin/indexU'; ?>" 
+          class="list-group-item list-group-item-action <?php if($this->uri->segment(2)=="indexU"){echo "active";}?> waves-effect">
           <i class="fas fa-laptop-code mr-3"></i>Url</a>
 
       </div>

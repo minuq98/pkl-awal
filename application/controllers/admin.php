@@ -102,7 +102,6 @@ class Admin extends CI_Controller {
 		'id' => $id
 	);
  
- var_dump($where['id']) or die;
 	$this->M_user->update_data($where,$data,'user');
 
 	redirect('admin/index');
@@ -172,11 +171,20 @@ class Admin extends CI_Controller {
 		'id' => $id
 	);
  
- var_dump($where['id']) or die;
 	$this->M_url->update_data($where,$data,'url');
 
 	redirect('user/index');
 	}
+
+	public function dashboardU()
+	{
+		$data['url']=$this->M_url->jumlah_url();
+		$this->load->view('header',$data);
+		$this->load->view('a_side_bar',$data);
+		$this->load->view('u_dashboard',$data);
+		$this->load->view('footer',$data);		
+	}
+	
 
 }
 

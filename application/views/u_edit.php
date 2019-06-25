@@ -41,7 +41,7 @@
 	<?php foreach($user as $u){ ?>
 	<form  action="<?php echo base_url(). 'index.php/user/updateU'; ?>" method="post">
 
-	<h1 class="h1 text-center" >Tambah Url</h1><br>
+	<h1 class="h1 text-center" >Update Url</h1><br>
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -72,7 +72,7 @@
   <input type="number" name="hit" value="<?php echo $u->hit?>">
 </div>
 <center>
-			<input class="btn btn-primary" type="submit" value="Simpan">
+			<input class="btn btn-warning" type="submit" value="Simpan">
 			
 	</form>	
 	<?php } ?>

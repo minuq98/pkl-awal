@@ -7,7 +7,7 @@
 
       <div class="list-group list-group-flush">
         <a href="
-            <?php if($this->session->userdata('is' == "admin")){echo "dashboard";}else{echo "dashboardU";} ?> " 
+            <?php if($this->session->userdata('is' == "admin")){ echo base_url().'index.php/admin/dashboard';}else{ echo base_url().'index.php/admin/dashboardU';} ?> " 
             class="list-group-item list-group-item-action <?php if($this->uri->segment(2)=="dashboard" || $this->uri->segment(2)=="dashboardU" ){echo "active";}?> waves-effect">
           <i class="fas fa-chart-pie mr-3" ></i>Dashboard
         </a>

@@ -40,7 +40,7 @@
 <?php foreach($user as $u){ ?>
 	<form action="<?php echo base_url(). 'index.php/admin/update'; ?>" method="post">
 	
-	<h1 class="h1 text-center" >Tambah User</h1><br>
+	<h1 class="h1 text-center" >Update User</h1><br>
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -89,7 +89,7 @@
 </div>		
 			<br>
 <center>
-			<input class="btn btn-primary" type="submit" value="Tambah">
+			<input class="btn btn-warning" type="submit" value="Simpan">
 			
 	</form>	
 	<?php } ?>

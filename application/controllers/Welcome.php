@@ -43,7 +43,7 @@ public function __construct()
  
  			if ( $is['is_admin']=="admin") {
  			
-			redirect(base_url("index.php/admin"));
+			redirect(base_url("index.php/admin/dashboard"));
  	
  			}
  			else{

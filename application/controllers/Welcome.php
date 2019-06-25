@@ -47,7 +47,7 @@ public function __construct()
  	
  			}
  			else{
- 				redirect(base_url("index.php/admin/indexU"));
+ 				redirect(base_url("index.php/admin/dashboardU"));
  			}
 		}else{
 			$this->load->view('welcome_message');

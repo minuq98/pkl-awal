@@ -35,6 +35,7 @@
 
             <!--Card content-->
             <div class="card-body">
+<center>
             <table class="table ">
                <?php 
 
@@ -50,12 +51,15 @@
                     if($u->is_admin =="not"){
                       $u->is_admin="user";
                     }
-                                    echo $u->is_admin ?></td>
+                      echo $u->is_admin ?></td>
     
                  </tr>
                </tbody>
 <?php } ?>
              </table> 
+
+<a class="btn btn-warning " href="editP" > <i class="fas fa-paper-plane"></i> Ganti</a>
+
                           </div>
 
           </div>

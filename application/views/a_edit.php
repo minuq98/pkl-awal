@@ -38,7 +38,10 @@
             <div class="card-body">
 
 <?php foreach($user as $u){ ?>
-	<form action="<?php echo base_url(). 'index.php/admin/update'; ?>" method="post">
+	<form action="<?php 
+        echo  base_url(). 'index.php/admin/update';
+      
+   ?>" method="post">
 	
 	<h1 class="h1 text-center" >Update User</h1><br>
 

@@ -35,6 +35,16 @@ class Admin extends CI_Controller {
 	 $this->load->view('footer',$data);
 
 	 }
+
+	function editP(){
+	$where = array('username' => $this->session->userdata('nama'));
+	$data['user'] = $this->M_user->edit_data($where,'user')->result();
+	$this->load->view('header', $data, FALSE);
+	$this->load->view('a_side_bar', $data, FALSE);
+	$this->load->view('a_edit',$data);
+	$this->load->view('footer', $data, FALSE);
+	}
+
 	public function dashboard()
 	{
 		$data['user']=$this->M_user->jumlah_user();
@@ -50,6 +60,8 @@ class Admin extends CI_Controller {
 	$this->load->view('a_input');
 	$this->load->view('footer');
 	} 
+
+
 	function tambah_user(){
 		$nama = $this->input->post('nama');
 		$username = $this->input->post('username');
@@ -106,7 +118,35 @@ class Admin extends CI_Controller {
 
 	redirect('admin/index');
 	}
+	function updateP(){
+			$id = $this->input->post('id');
+		$nama = $this->input->post('nama');
+		$username = $this->input->post('username');
+		$password = md5($this->input->post('password'));
+ 		$email = $this->input->post('email');
+		$is_admin = $this->input->post('is_admin');
+		$createdAt	 = $this->input->post('createdAt');
+		$updatedAt	 = $this->input->post('updatedAt');
+		$data = array(
+			'nama' => $nama,
+			'username' => $username,
+			'password' => $password,
+			'email' => $email,
+			'is_admin' => $is_admin,
+			);
+		
+	$where = array(
+		'id' => $id
+	);
+ 
+	$this->M_user->update_data($where,$data,'user');
+		if($this->session->userdata('is') == 'admin'){
+				redirect('admin/index');
+		}else{
+			redirect('admin/profil');
+		}
 
+	}
 	public function indexU()
 	{
 		$data['user'] = $this->M_url->tampil()->result();

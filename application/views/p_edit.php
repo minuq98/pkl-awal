@@ -62,7 +62,7 @@
   <div class="input-group-prepend">
     <span class="input-group-text" id="basic-addon3">Password</span>
   </div>
-		<input type="text" name="password" >
+		<input type="password" name="password" value="<?php echo $u->password?>">
 			
 </div>
 

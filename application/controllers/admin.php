@@ -41,8 +41,33 @@ class Admin extends CI_Controller {
 	$data['user'] = $this->M_user->edit_data($where,'user')->result();
 	$this->load->view('header', $data, FALSE);
 	$this->load->view('a_side_bar', $data, FALSE);
-	$this->load->view('a_edit',$data);
+	$this->load->view('p_edit',$data);
 	$this->load->view('footer', $data, FALSE);
+	}
+	function updateP(){
+			$id = $this->session->userdata('id');
+		$nama = $this->input->post('nama');
+		$username = $this->input->post('username');
+		$password = md5($this->input->post('password'));
+ 		$email = $this->input->post('email');
+		$is_admin = $this->input->post('is_admin');
+		$createdAt	 = $this->input->post('createdAt');
+		$updatedAt	 = $this->input->post('updatedAt');
+		$data = array(
+			'nama' => $nama,
+			'username' => $username,
+			'password' => $password,
+			'email' => $email,
+			'is_admin' => $is_admin,
+			);
+		
+	$where = array(
+		'id' => $id
+	);
+ 
+	$this->M_user->update_data($where,$data,'user');
+			redirect('admin/profil');
+
 	}
 
 	public function dashboard()
@@ -117,35 +142,6 @@ class Admin extends CI_Controller {
 	$this->M_user->update_data($where,$data,'user');
 
 	redirect('admin/index');
-	}
-	function updateP(){
-			$id = $this->input->post('id');
-		$nama = $this->input->post('nama');
-		$username = $this->input->post('username');
-		$password = md5($this->input->post('password'));
- 		$email = $this->input->post('email');
-		$is_admin = $this->input->post('is_admin');
-		$createdAt	 = $this->input->post('createdAt');
-		$updatedAt	 = $this->input->post('updatedAt');
-		$data = array(
-			'nama' => $nama,
-			'username' => $username,
-			'password' => $password,
-			'email' => $email,
-			'is_admin' => $is_admin,
-			);
-		
-	$where = array(
-		'id' => $id
-	);
- 
-	$this->M_user->update_data($where,$data,'user');
-		if($this->session->userdata('is') == 'admin'){
-				redirect('admin/index');
-		}else{
-			redirect('admin/profil');
-		}
-
 	}
 	public function indexU()
 	{

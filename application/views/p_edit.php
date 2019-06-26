@@ -38,7 +38,7 @@
             <div class="card-body">
 
 <?php foreach($user as $u){ ?>
-	<form action="<?php echo  base_url(). 'index.php/admin/update';   ?>" method="post">
+	<form action="<?php echo  base_url(). 'index.php/admin/updateP';   ?>" method="post">
 	
 	<h1 class="h1 text-center" >Update User</h1><br>
 
@@ -62,7 +62,7 @@
   <div class="input-group-prepend">
     <span class="input-group-text" id="basic-addon3">Password</span>
   </div>
-		<input type="text" name="password">
+		<input type="text" name="password" >
 			
 </div>
 
@@ -73,20 +73,6 @@
  <input type="text" name="email" value="<?php echo $u->email?>">
 			
 </div>
-<label>Jenis user</label> <br>
-			
-<div class="input-group">
-  <div class="input-group-prepend">
-    <div class="input-group-text">
-      		<input type="radio" name="is_admin" value="admin" > admin
-
-    </div>
-    <div class="input-group-text">
-    		<input type="radio" name="is_admin" value="not"> user<br>
-  			
-    </div>
-  </div>
-</div>		
 			<br>
 <center>
 			<input class="btn btn-warning" type="submit" value="Simpan">

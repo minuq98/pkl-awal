@@ -33,6 +33,7 @@ public function __construct()
 		if($cek > 0 && $this->form_validation->run() != false){
  
 			$data_session = array(
+				'id' => $is['id'],
 				'nama' => $username,
 				'status' => "login",
 				'is'	=> $is['is_admin'],

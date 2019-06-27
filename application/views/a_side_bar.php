@@ -1,5 +1,5 @@
     <!-- Sidebar -->
-    <div class="sidebar-fixed position-fixed">
+    <div class="sidebar-fixed position-fixed ">
 
       <a class="logo-wrapper waves-effect">
         <img src="https://static1.squarespace.com/static/58d006b0e4fcb591d4c1a2ce/t/5af5f3440e2e725de5b5e516/1560439745959/" >
@@ -29,4 +29,6 @@
 
     </div>
     <!-- Sidebar -->
+</div>
 
+</header>

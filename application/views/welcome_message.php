@@ -6,6 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html >
 <head>
 
+  <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/ringtone-music-instruments/512/letter-c-key-keyboard-2-512.png">
+ <title>CRUD</title>
+  <!-- Author Meta -->
   <style type="text/css">
     @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
@@ -119,7 +122,6 @@ body {
       <input type="text" placeholder="username" name="username" />
       <input type="password" placeholder="password" name="password" />
       <button  type="submit" value="login">Login </button>
-      <p class="message">Not registered? <a href="#">Create an account</a></p>
     </form>
   </div>
 </div>

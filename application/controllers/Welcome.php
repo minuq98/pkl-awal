@@ -11,7 +11,10 @@ public function __construct()
 }
 	public function index()
 	{
-		$this->load->view('welcome_message');
+	$this->load->view('landing');
+	}
+	function login(){
+		$this->load->view('welcome_message');		
 	}
 	function aksi_login(){
 		$this->form_validation->set_rules('username','Username','required');

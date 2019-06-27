@@ -28,10 +28,10 @@
       <div class="row wow fadeIn">
 
         <!--Grid column-->
-        <div class="col-md-7 mb-4">
+        <div class="col-md-12 mb-4">
 
           <!--Card-->
-          <div class="card mb-3">
+          <div class="card ">
 
             <!--Card content-->
             <div class="card-body">
@@ -43,6 +43,16 @@
                   </span>
                 </a>
               	<a class="list-group-item list-group-item-action waves-effect">Jumlah Semua Url
+                  <span class="badge badge-success badge-pill pull-right"><?php  echo $url; ?>
+                    <i class="fas fa-arrow-up ml-1"></i>
+                  </span>
+                </a>
+                <a class="list-group-item list-group-item-action waves-effect">Jumlah Semua User
+                  <span class="badge badge-success badge-pill pull-right"><?php  echo $user; ?>
+                    <i class="fas fa-arrow-up ml-1"></i>
+                  </span>
+                </a>
+                <a class="list-group-item list-group-item-action waves-effect">Jumlah Semua Url
                   <span class="badge badge-success badge-pill pull-right"><?php  echo $url; ?>
                     <i class="fas fa-arrow-up ml-1"></i>
                   </span>
@@ -61,12 +71,6 @@
 
           </div>
           <!--/.Card-->
-
-        </div>
-        <!--Grid column-->
-
-      </div>
-      <!--Grid row-->
 
       <!--Grid row-->
       

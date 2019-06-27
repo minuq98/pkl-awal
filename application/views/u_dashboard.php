@@ -43,6 +43,36 @@
                     <i class="fas fa-arrow-up ml-1"></i>
                   </span>
                 </a>
+                <a class="list-group-item list-group-item-action waves-effect">Jumlah Semua Url
+                  <span class="badge badge-success badge-pill pull-right"><?php  echo $url; ?>
+                    <i class="fas fa-arrow-up ml-1"></i>
+                  </span>
+                </a>
+              
+                <a class="list-group-item list-group-item-action waves-effect">Jumlah Semua Url
+                  <span class="badge badge-success badge-pill pull-right"><?php  echo $url; ?>
+                    <i class="fas fa-arrow-up ml-1"></i>
+                  </span>
+                </a>
+              
+                <a class="list-group-item list-group-item-action waves-effect">Jumlah Semua Url
+                  <span class="badge badge-success badge-pill pull-right"><?php  echo $url; ?>
+                    <i class="fas fa-arrow-up ml-1"></i>
+                  </span>
+                </a>
+              
+                <a class="list-group-item list-group-item-action waves-effect">Jumlah Semua Url
+                  <span class="badge badge-success badge-pill pull-right"><?php  echo $url; ?>
+                    <i class="fas fa-arrow-up ml-1"></i>
+                  </span>
+                </a>
+              
+                <a class="list-group-item list-group-item-action waves-effect">Jumlah Semua Url
+                  <span class="badge badge-success badge-pill pull-right"><?php  echo $url; ?>
+                    <i class="fas fa-arrow-up ml-1"></i>
+                  </span>
+                </a>
+              
               
               </div>
 

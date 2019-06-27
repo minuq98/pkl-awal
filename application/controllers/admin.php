@@ -25,7 +25,7 @@ class Admin extends CI_Controller {
 	 }
 	 public function profil(){
 	 	$where = array(
-			'username' => $this->session->userdata('nama')
+			'id' => $this->session->userdata('id')
 			);
 	
 	 $data['user'] = $this->M_user->cek_login("user",$where)->result();
@@ -37,7 +37,7 @@ class Admin extends CI_Controller {
 	 }
 
 	function editP(){
-	$where = array('username' => $this->session->userdata('nama'));
+	$where = array('id' => $this->session->userdata('id'));
 	$data['user'] = $this->M_user->edit_data($where,'user')->result();
 	$this->load->view('header', $data, FALSE);
 	$this->load->view('a_side_bar', $data, FALSE);
@@ -50,24 +50,23 @@ class Admin extends CI_Controller {
 		$username = $this->input->post('username');
 		$password = md5($this->input->post('password'));
  		$email = $this->input->post('email');
-		$is_admin = $this->input->post('is_admin');
-		$createdAt	 = $this->input->post('createdAt');
-		$updatedAt	 = $this->input->post('updatedAt');
+	     date_default_timezone_set("Asia/Bangkok");//
+		$updatedAt	 = date('Y-m-d G:i:s');;
 		$data = array(
 			'nama' => $nama,
 			'username' => $username,
 			'password' => $password,
 			'email' => $email,
-			'is_admin' => $is_admin,
+			'updatedAt' => $updatedAt
 			);
 		
 	$where = array(
 		'id' => $id
 	);
- 
-	$this->M_user->update_data($where,$data,'user');
+    $this->M_user->update_data($where,$data,'user');
 			redirect('admin/profil');
 
+   
 	}
 
 	public function dashboard()
@@ -93,17 +92,24 @@ class Admin extends CI_Controller {
 		$password = md5($this->input->post('password'));
  		$email = $this->input->post('email');
 		$is_admin = $this->input->post('is_admin');
-		$createdAt	 = $this->input->post('createdAt');
-		$updatedAt	 = $this->input->post('updatedAt');
-		$data = array(
+ date_default_timezone_set("Asia/Bangkok");//
+		$updatedAt	 = date('Y-m-d G:i:s');;
+				$data = array(
 			'nama' => $nama,
 			'username' => $username,
 			'password' => $password,
 			'email' => $email,
 			'is_admin' => $is_admin,
-			);
+			'updatedAt' => $updatedAt
+		);
+		  $this->db->select('username');
+   $this->db->where(['username','nama','email'],[$username,$nama,$email]);		
+   $query =$this->db->get('user');
+   $row = $query->row();
+   if ($query->num_rows > 0){
 		$this->M_user->input_data($data,'user');
-		redirect('admin/index');
+}
+		redirect('admin/index');	
 	}
 	function edit($id){
 	$where = array('id' => $id);
@@ -119,28 +125,28 @@ class Admin extends CI_Controller {
 	redirect('admin/index');
 	}	
 	function update(){
-			$id = $this->input->post('id');
+		$id = $this->input->post('id');
 		$nama = $this->input->post('nama');
 		$username = $this->input->post('username');
 		$password = md5($this->input->post('password'));
  		$email = $this->input->post('email');
 		$is_admin = $this->input->post('is_admin');
 		$createdAt	 = $this->input->post('createdAt');
-		$updatedAt	 = $this->input->post('updatedAt');
+		 date_default_timezone_set("Asia/Bangkok");//
+		$updatedAt	 = date('Y-m-d G:i:s');;
 		$data = array(
 			'nama' => $nama,
 			'username' => $username,
 			'password' => $password,
 			'email' => $email,
 			'is_admin' => $is_admin,
+			'updatedAt' =>$updatedAt
 			);
 		
 	$where = array(
 		'id' => $id
 	);
- 
-	$this->M_user->update_data($where,$data,'user');
-
+ $this->M_user->update_data($where,$data,'user');
 	redirect('admin/index');
 	}
 	public function indexU()
@@ -162,14 +168,15 @@ class Admin extends CI_Controller {
 		$short_url = $this->input->post('short_url');
 		$url = $this->input->post('url');
  		$hit = $this->input->post('hit');
-		$createdAt	 = $this->input->post('createdAt');
-		$updatedAt	 = $this->input->post('updatedAt');
+ date_default_timezone_set("Asia/Bangkok");//
+		$updatedAt	 = date('Y-m-d G:i:s');;
+		
 		$data = array(
 			'id_user' => $id_user,
 			'short_url' => $short_url,
 			'url' => $url,
 			'hit' => $hit,
-
+			'updatedAt' => $updatedAt
 			);
 		$this->M_url->input_data($data,'url');
 		redirect('user/index');
@@ -188,22 +195,23 @@ class Admin extends CI_Controller {
 	$this->load->view('footer', $data, FALSE);
 	}
 	function updateU(){
-			$id = $this->input->post('id');
-		 $id_user = $this->input->post('id_user');
+		$id = $this->input->post('id');
+		$id_user = $this->input->post('id_user');
 		$short_url =$this->input->post('short_url');
 		$url = $this->input->post('url');
  		$hit = $this->input->post('hit');
-
-		$createdAt	 = $this->input->post('createdAt');
-		$updatedAt	 = $this->input->post('updatedAt');
+ date_default_timezone_set("Asia/Bangkok");//
+		$updatedAt	 = date('Y-m-d G:i:s');;
+		
 		$data = array(
 			'id_user' => $id_user,
 			'short_url' => $short_url,
 			'url' => $url,
 			'hit' => $hit,
+			'updatedAt'
 			);
 		
-	$where = array(
+		$where = array(
 		'id' => $id
 	);
  
@@ -223,6 +231,3 @@ class Admin extends CI_Controller {
 	
 
 }
-
-/* End of file controllername.php */
-/* Location: ./application/controllers/controllername.php */

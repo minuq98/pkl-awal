@@ -69,7 +69,7 @@ position:absolute;
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php  echo base_url('index.php/welcome/logout') ?>" class="nav-link border border-light rounded waves-effect"
+              <a href="<?php  echo base_url('keluar') ?>" class="nav-link border border-light rounded waves-effect"
               >
                 <i class="fab fa-github mr-2"></i>Log Out
               </a>

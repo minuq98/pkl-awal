@@ -27,10 +27,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | There are three reserved routes:
 |
-|	$route['default_controller'] = 'welcome';
+|	$route['default_controller'] = 'home_page';
 |
 | This route indicates which controller class should be loaded if the
-| URI contains no data. In the above example, the "welcome" class
+| URI contains no data. In the above example, the "home_page" class
 | would be loaded.
 |
 |	$route['404_override'] = 'errors/page_missing';
@@ -49,6 +49,52 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'home_page';
+//admin
+$route['tampilkan_user'] ='user/show_user';
+$route['profil'] ='user/profile';
+$route['ganti_profil'] ='user/edit_profile';
+$route['ubah_profil'] ='user/update_profile/';
+$route['beranda_admin'] ='user/dashboard_admin';
+$route['tambah_user'] ='user/get_data_user';
+$route['aksi_user'] ='user/add_user';
+$route['ubah_user/(:num)'] ='user/edit_user/$1';
+$route['hapus_user/(:num)'] ='user/delete_user/$1';
+$route['ubah_user'] = 'user/update_user';
+
+$route['beranda_user'] ='user/dashboard_user';
+$route['url'] ='user/show_url';
+$route['tambah_url'] ='user/get_data_url';
+$route['aksi_url'] ='user/add_url';	
+$route['ubah_url/(:num)'] ='user/edit_url/$1';
+$route['hapus_url/(:num)'] = 'user/delete_url/$1';
+$route['ubah_url'] = 'user/update_url';
+
+//home_page
+$route['halo'] ='home_page/landing';
+$route['masuk'] ='home_page/login';
+$route['aksi'] ='home_page/action_login';
+$route['keluar'] ='home_page/logout';
+
+// require_once( BASEPATH .'database/DB'. EXT );
+// $db =& DB();
+// $query = $db->get( 'url' );
+// $result = $query->result();
+// foreach( $result as $row )
+// {
+//     $route[ $row->short_url ]                 = $row->url;
+// //    $route[ $row->slug.'/:any' ]         = $row->controller;
+//     $route[ $row->controller ]           = 'error404';
+//     $route[ $row->controller.'/:any' ]   = 'error404';
+// }
+
+$route['(:any)'] = 'home_page/shorturl/$1';
+
+
+
+
+
+$route['nyoba/(:any)'] = 'home_page/shorturl/$1';
 $route['404_override'] = '';
+$route['error_404'] = '';
 $route['translate_uri_dashes'] = FALSE;

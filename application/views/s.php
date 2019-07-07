@@ -1,4 +1,4 @@
-<?php
+	<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 ?>
@@ -116,13 +116,17 @@ body {
 <div class="login-page">
   <div class="form" >
 
-    <form class="login-form" action="<?php echo base_url('index.php/welcome/aksi_login'); ?>" method="post">
-      <?php echo form_open(base_url('index.php/welcome/aksi_login')); ?>
-    
-      <input type="text" placeholder="username" name="username" />
-      <input type="password" placeholder="password" name="password" />
-      <button  type="submit" value="login">Login </button>
-    </form>
+		<?php echo validation_errors(); ?>
+	<?php echo form_open('user/aksi'); ?>
+		<label>Nama</label><br/>
+		<input type="text" name="nama"><br/>
+		<label>Email</label><br/>
+		<input type="text" name="email"><br/>
+		<label>Konfirmasi Email</label><br/>
+		<input type="text" name="konfir_email"><br/>
+		<button  type="submit" value="Simpan">Simpan</button>
+	</form>
+
   </div>
 </div>
 <script type="text/javascript">

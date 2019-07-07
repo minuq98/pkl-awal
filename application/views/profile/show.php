@@ -10,7 +10,7 @@
         <div class="card-body d-sm-flex justify-content-between">
 
           <h4 class="mb-2 mb-sm-0 pt-1">
-            <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Home Page </a>
+            <a href="<?php if($this->session->userdata('is' == "admin")){ echo base_url('beranda_admin');}else{ echo base_url('beranda_user');} ?>" >Home Page </a>
             <span>/</span>
             <span>Profile</span>
           </h4>
@@ -43,22 +43,18 @@
     
                <tbody>
                  <tr>
-                   <td><strong> Nama</strong>       : <?php  echo $u->nama ?> </td></tr>
-                 <tr> <td><strong> Username</strong>        : <?php echo $u->username ?></td></tr>
-                  <tr><td><strong> Password</strong>        : <?php echo $u->password ?></td></tr>
-                  <tr><td><strong> Email</strong>       : <?php echo $u->email ?></td></tr>
+                   <td><strong> Nama Lengkap</strong>       : <?php  echo $u->nama ?> </td></tr>
+                   <tr> <td><strong> Nama User</strong>        : <?php echo $u->username ?></td></tr>
+                  <tr><td><strong> Email User</strong>       : <?php echo $u->email ?></td></tr>
                   <td><strong> Jenis User</strong>        : <?php 
-                    if($u->is_admin =="not"){
-                      $u->is_admin="user";
-                    }
-                      echo $u->is_admin ?></td>
+                    echo $u->is_admin ?></td>
     
                  </tr>
                </tbody>
 <?php } ?>
              </table> 
 
-<a class="btn btn-warning " href="editP" > <i class="fas fa-paper-plane"></i> Ganti</a>
+<a class="btn btn-warning " href="<?php echo base_url('ganti_profil') ?>" > <i class="fas fa-paper-plane"></i> Ganti</a>
 
                           </div>
 

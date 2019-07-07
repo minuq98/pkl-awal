@@ -12,9 +12,9 @@
         <div class="card-body d-sm-flex justify-content-between">
 
           <h4 class="mb-2 mb-sm-0 pt-1">
-            <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Home Page </a>
+            <a href="<?php if($this->session->userdata('is' == "admin")){ echo base_url().'beranda_admin';}else{ echo base_url('beranda_user');} ?>">Home Page </a>
             <span>/</span>
-            <span>User</span>
+            <span>URL</span>
           </h4>
 
         
@@ -39,43 +39,23 @@
             <div class="card-body">
 
 	<?php foreach($user as $u){ ?>
-	<form  action="<?php echo base_url(). 'index.php/user/updateU'; ?>" method="post">
-
+	<form  action="<?php echo base_url('ubah_url'); ?>" method="post">
+    <?php form_open('ubah_url'); ?>
 	<h1 class="h1 text-center" >Update Url</h1><br>
 
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">id_user</span>
-  </div>					
   <input type="hidden" name="id" value="<?php echo $u->id ?>">
- <input type="number" name="id_user" value="<?php echo $u->id_user ?>">
-
-</div>
-
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">Sort Url</span>
-  </div><input type="text" name="short_url" value="<?php echo $u->short_url ?>">
+    <span class="input-group-text" id="basic-addon3">URL Pendek</span>
+  </div><input type="text" name="short_url" value="<?php echo $u->short_url ?>" minlength="3">
+  <input type="hidden" name="hit" value="<?php echo $u->hit ?>">
 </div>
 
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">Url</span>
-  </div>
-<input type="text" name="url" value="<?php echo $u->url ?>">
-</div>
-
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">Hit</span>
-  </div>
-  <input type="number" name="hit" value="<?php echo $u->hit?>">
-</div>
 <center>
 			<input class="btn btn-warning" type="submit" value="Simpan">
 			
-	</form>	
-	<?php } ?>
+	
+	<?php form_close(); } ?>
     
             </div>
 

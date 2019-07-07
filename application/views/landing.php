@@ -46,7 +46,7 @@
 								<a href="#lemper">Lemper</a>
 								<a href="#about">About</a>
 
-								<a href="<?php echo base_url("index.php/welcome/login") ?>">Login</a>
+								<a href="<?php echo base_url("masuk") ?>">Login</a>
 							</nav>
 							<div class="menu-bar"><span class="lnr lnr-menu"></span></div>
 						</div>

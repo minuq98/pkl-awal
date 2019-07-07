@@ -12,7 +12,7 @@
         <div class="card-body d-sm-flex justify-content-between">
 
           <h4 class="mb-2 mb-sm-0 pt-1">
-            <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Home Page </a>
+            <a href="<?php if($this->session->userdata('is' == "admin")){ echo base_url().'beranda_admin';}else{ echo base_url('beranda_user');} ?>">Home Page </a>
             <span>/</span>
             <span>User</span>
           </h4>
@@ -37,42 +37,23 @@
 
             <!--Card content-->
             <div class="card-body">
-
-<form action="<?php echo base_url(). 'index.php/user/tambah_userU'; ?>" method="post">
   
+  <?php
+  echo validation_errors();
+  echo form_open('aksi_url'); ?>  
   <h1 class="h1 text-center" >Tambah Url</h1><br>
 
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">id_user</span>
-  </div>          
- <input type="number" name="id_user" >
-
-</div>
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">Sort Url</span>
-  </div><input type="text" name="short_url" >
-</div>
-
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">Url</span>
+    <span class="input-group-text" id="basic-addon3">Nama URL</span>
   </div>
-<input type="text" name="url" >
+<input type="url" required name="url" >
 </div>
 
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">Hit</span>
-  </div>
-  <input type="number" name="hit" >
-</div>
 <center>
       <input class="btn btn-primary" type="submit" value="Simpan">
-      
-  </form> 
+      <?php echo form_close(); ?> 
             </div>
 
           </div>

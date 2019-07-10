@@ -124,7 +124,7 @@ body {
 		<input type="text" name="email"><br/>
 		<label>Konfirmasi Email</label><br/>
 		<input type="text" name="konfir_email"><br/>
-		<button  type="submit" value="Simpan">Simpan</button>
+		<button  type="submit" >Simpan</button>
 	</form>
 
   </div>

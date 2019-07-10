@@ -69,6 +69,8 @@ $route['aksi_url'] ='user/add_url';
 $route['ubah_url/(:num)'] ='user/edit_url/$1';
 $route['hapus_url/(:num)'] = 'user/delete_url/$1';
 $route['ubah_url'] = 'user/update_url';
+$route['log'] = 'user/logger';
+$route['log/(:any)'] = 'user/logger/$1';
 
 //home_page
 $route['halo'] ='home_page/landing';

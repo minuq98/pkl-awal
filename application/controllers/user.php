@@ -19,6 +19,24 @@ class User extends CI_Controller {
 		$this->load->view('s');
 	}
 
+	public function logger(){
+		$this->load->database();
+		$count = $this->Model_user->count_logger();
+		$this->load->library('Pagination');
+		$config['base_url'] = base_url('log');
+		$config['total_rows'] = $count;
+		$config['per_page']	= 5;
+		$from = $this->uri->segment(3);
+		$this->pagination->initialize($config);
+		$data['user']=$this->Model_user->logger_data($config['per_page'],$from);
+		$this->load->view('admin_panel/header', $data, FALSE);
+		$this->load->view('admin_panel/side_bar', $data, FALSE);
+		$this->load->view('admin_panel/logger', $data);	
+		$this->load->view('admin_panel/footer', $data, FALSE);
+	
+
+	}
+
 	public function aksi(){
 		$this->form_validation->set_rules('nama','Nama','required');
 		$this->form_validation->set_rules('email','Email','required');

@@ -120,9 +120,9 @@ body {
     <?php endif; ?>
     <?php echo validation_errors(); ?>
       <?php echo form_open(base_url('aksi')); ?>
-      <input type="text" class="required" minlength="4" placeholder="username" name="username"/>
-      <input type="password" placeholder="password" name="password" />
-      <button  type="submit" value="login">Login </button>
+      <input type="text" required minlength="4" placeholder="username" name="username"/>
+      <input type="password" required placeholder="password" name="password" />
+      <button  type="submit" >Login </button>
     <?php echo form_close(); ?>
   </div>
 </div>

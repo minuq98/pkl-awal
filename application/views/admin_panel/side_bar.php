@@ -24,7 +24,10 @@
         <a href="<?php echo base_url('url'); ?>" 
           class="list-group-item list-group-item-action <?php if($this->uri->segment(2)=="show_url" || $this->uri->segment(1) == "url"){echo "active";}?> waves-effect">
           <i class="fas fa-laptop-code mr-3"></i>Url</a>
-
+          <a href="<?= base_url('log') ?>"
+           class="list-group-item list-group-item-action <?php if ($this->uri->segment(1) == 'log' || $this->uri->segment(2) == 'logger' )echo  'active' ;?> waves-effect">
+             <i class="fa fa-history mr-3"> </i>Logger
+           </a>
       </div>
 
     </div>

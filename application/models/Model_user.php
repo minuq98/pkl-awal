@@ -6,6 +6,12 @@ class Model_user extends CI_Model {
 	function input_data($data,$table){
 		$this->db->insert($table,$data);
 	}
+	function logger_data($number,$offset){
+		return $query = $this->db->get('logger',$number,$offset)->result();		
+	}
+ 
+	
+
 	function update_data($where,$data,$table){
 		$this->db->where($where);
 		$this->db->update($table,$data);
@@ -26,6 +32,9 @@ class Model_user extends CI_Model {
 	}		
 	function count_url(){
 		return $this->db->count_all_results('url');
+	}
+	function count_logger(){
+		return $this->db->get('logger')->num_rows();
 	}		
 	function count_max(){
 		$max =  $this->db->select_max('hit')->from('url')->get()->row_array();

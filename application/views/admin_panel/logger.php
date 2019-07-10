@@ -62,9 +62,12 @@
 		<?php } ?>
 	</table>
 
-	<?php 
-  echo $this->pagination->create_links();
-  ?>
+   <div class="row">
+        <div class="col">
+	<?php   echo $this->pagination->create_links();?>
+            <!--Tampilkan pagination-->
+        </div>
+    </div>
             </div>
 
           </div>

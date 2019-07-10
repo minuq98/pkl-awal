@@ -5,7 +5,7 @@
     @import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
 
 body {
-  background-color: #f1c40f;
+  background-color: #ffffff;
   overflow: hidden;
 }
 
@@ -15,16 +15,16 @@ h1 {
   font-weight: 600;
   font-size: 12px;
   text-transform: uppercase;
-  left: 40%;
+  left: 45%;
   top: 58%;
   margin-left: -20px;
 }
 
 .body {
   position: absolute;
-  top: 50%;
+  top: 40%;
   margin-left: -50px;
-  left: 50%;
+  left: 50%; 
   animation: speeder .4s linear infinite;
 }
 

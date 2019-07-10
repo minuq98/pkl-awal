@@ -26,7 +26,7 @@ class User extends CI_Controller {
 		$config['base_url'] = base_url('user/logger');
 		$config['total_rows'] = $count;
 		$config['per_page']	= 5;
- $config['first_link']       = 'First';
+ 		$config['first_link']       = 'First';
         $config['last_link']        = 'Last';
         $config['next_link']        = 'Next';
         $config['prev_link']        = 'Prev';

@@ -100,3 +100,4 @@ $route['nyoba/(:any)'] = 'home_page/shorturl/$1';
 $route['404_override'] = '';
 $route['error_404'] = '';
 $route['translate_uri_dashes'] = FALSE;
+

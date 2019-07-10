@@ -37,8 +37,7 @@ class Home_page extends CI_Controller {
 	
 	}
 
-	public function shorturl($short){
-		
+		public function shorturl($short){
 		$url = $this->Model_user->get_short_url($short);
 		// oprator ternari echo $url ? "yap" : "nope"; exit;
 		// print_r($url); exit;
@@ -49,7 +48,9 @@ class Home_page extends CI_Controller {
 			$short = array('short_url' => $short);
 			$hit = $this->Model_user->update_data($short ,$data , 'url');
 
-			 redirect($url->row()->url);
+			$this->load->view('countdown',$url->row());
+	
+			
 		} else {
 			echo show_404();
 		}

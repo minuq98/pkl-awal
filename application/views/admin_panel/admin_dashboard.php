@@ -55,7 +55,8 @@
                 Sebanyak
                   <span class="badge badge-pill  badge-success"><?php      echo strtoupper($most_visited->hit);?> <i class="fas fa-arrow-up ml-1"></i>
                   </span>
-                   User  
+                  <span class="badge badge-danger">AKSES</span>
+                 Oleh User  
                 <span class="badge badge-danger"><?php      echo strtoupper($most_visited->username);?>
                   </span>
                 </a>
@@ -75,6 +76,7 @@
                     <i class="fas fa-arrow-up ml-1"></i>
                    </span>
                    <span class="badge badge-danger">AKSES</span>
+
                  </a>
                   
               </div>

@@ -13,10 +13,12 @@ class User extends CI_Controller {
 		date_default_timezone_set("Asia/Bangkok");//
 			
 	}
+
+
 	public function index(){
 		$this->load->view('s');
 	}
-	
+
 	public function aksi(){
 		$this->form_validation->set_rules('nama','Nama','required');
 		$this->form_validation->set_rules('email','Email','required');
@@ -26,7 +28,8 @@ class User extends CI_Controller {
 			echo "Form validation oke";
 		}else{
 			$this->load->view('s');
-	}}
+		}
+	}
 	
 	public function show_user()
 	{

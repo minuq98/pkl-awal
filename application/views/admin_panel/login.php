@@ -115,7 +115,9 @@ body {
 <body>
 <div class="login-page">
   <div class="form" >
-
+    <?php if($this->session->userdata('errorLogin')): ?>
+    <h4>Maaf, username atau password salah</h4>
+    <?php endif; ?>
     <?php echo validation_errors(); ?>
       <?php echo form_open(base_url('aksi')); ?>
       <input type="text" class="required" minlength="4" placeholder="username" name="username"/>

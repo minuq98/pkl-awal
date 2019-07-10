@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!doctype html>
 <html>
  <head>
-   <title>404 Page Not Found</title>
+   <title>Banned</title>
    <style>
    body{
      width: 99%;
@@ -46,8 +46,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  </head>
  <body>
  		<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+		<h1> Terblokir</h1>
+		Akun anda telah terblokir !
+    Silahkan Hubungi Admin 
 	</div>
 </body>
 </html>

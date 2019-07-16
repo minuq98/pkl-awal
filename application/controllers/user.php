@@ -6,27 +6,26 @@ class User extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		if($this->session->userdata('status') != "login"){
+		if ($this->session->userdata('status') != "login") {
 			redirect(base_url());
 		}
+		
 		$this->load->model('Model_user');
-		date_default_timezone_set("Asia/Bangkok");//
-			
+		
+		date_default_timezone_set("Asia/Bangkok");//		
 	}
 
-
-	public function index(){
+	public function index()
+	{
 		$this->load->view('s');
 	}
 
-	public function logger(){
-		$this->load->database();
-		$count = $this->Model_user->count_logger();
+	public function pagination()
+	{
 		$this->load->library('Pagination');
-		$config['base_url'] = base_url('user/logger');
-		$config['total_rows'] = $count;
+		
 		$config['per_page']	= 5;
- 		$config['first_link']       = 'First';
+ 		$config['first_link']       = 'First';	
         $config['last_link']        = 'Last';
         $config['next_link']        = 'Next';
         $config['prev_link']        = 'Prev';
@@ -44,10 +43,37 @@ class User extends CI_Controller {
         $config['first_tagl_close'] = '</span></li>';
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
- 
-		$from = $this->uri->segment(3);
+        
+        return $config;
+	}
+
+	public function logger($row_no=0)
+	{
+		$search_text ="";
+		
+       	if ($this->input->post('submit') != null) {			
+			$search_text= $this->input->post('key');
+			$this->session->set_userdata(array('key' => $search_text));
+		}
+
+		if ($this->input->post('reset') != null) {
+			$this->session->unset_userdata('key');			
+		}
+
+		if($this->session->userdata('key') != null) {
+			$search_text = $this->session->userdata('key');
+		}
+
+   		$config = $this->pagination();
+ 	   	$count = $this->Model_user->count_logger($search_text);
+		
+		$config['base_url'] = base_url('log');
+		$config['total_rows'] = $count;
 		$this->pagination->initialize($config);
-		$data['user']=$this->Model_user->logger_data($config['per_page'],$from);
+		
+		$data['page'] =  $this->uri->segment(2);
+ 		$data['user']=$this->Model_user->logger_data($config['per_page'],$data['page'],$search_text);
+		
 		$this->load->view('admin_panel/header', $data, FALSE);
 		$this->load->view('admin_panel/side_bar', $data, FALSE);
 		$this->load->view('admin_panel/logger', $data);	
@@ -56,23 +82,12 @@ class User extends CI_Controller {
 
 	}
 
-	public function aksi(){
-		$this->form_validation->set_rules('nama','Nama','required');
-		$this->form_validation->set_rules('email','Email','required');
-		$this->form_validation->set_rules('konfir_email','Konfirmasi Email','required');
- 
-		if($this->form_validation->run() != false){
-			echo "Form validation oke";
-		}else{
-			$this->load->view('s');
-		}
-	}
-	
 	public function show_user()
 	{
 		$where = array('id !=' => $this->session->userdata('id'));
 		$data['user'] = 
 			$this->Model_user->check($where,"user")->result();		
+		
 		$this->load->view('admin_panel/header', $data, FALSE);
 		$this->load->view('admin_panel/side_bar', $data, FALSE);
 		$this->load->view('user/show', $data, FALSE);
@@ -83,6 +98,7 @@ class User extends CI_Controller {
 	 	$where = array('id' => $this->session->userdata('id'));
 	  	$data['user'] = 
 	  		$this->Model_user->check($where,"user")->result();
+		
 		$this->load->view('admin_panel/header',$data);
 	 	$this->load->view('admin_panel/side_bar',$data);
 	 	$this->load->view('profile/show',$data);
@@ -94,6 +110,7 @@ class User extends CI_Controller {
 		$where = array('id' => $this->session->userdata('id'));
 		$data['user'] = 
 			$this->Model_user->check($where,'user')->result();
+		
 		$this->load->view('admin_panel/header', $data, FALSE);
 		$this->load->view('admin_panel/side_bar', $data, FALSE);
 		$this->load->view('profile/edit',$data);
@@ -101,22 +118,22 @@ class User extends CI_Controller {
 	}
 
 	public function update_profile(){
-		$id = $this->session->userdata('id');
-	
-		$w = array('id' => $id);
-		$data=$this->Model_user->check($w,'user')->row_array();
-	
+		$id = $this->session->userdata('id');	
+		$where = array('id' => $id);
+		$data=$this->Model_user->check($where,'user')->row_array();
 		$nama = $this->input->post('nama');
 		$username = $this->input->post('username');
-		if( md5($this->input->post('password')) == $data['password'] ||
-			empty(md5($this->input->post['password'])))
-		{$password =  md5($this->input->post('password'));			
-		}else {$password = $data['password'];}
+
+		if (md5($this->input->post('password')) == $data['password'] ||
+			empty(md5($this->input->post['password']))) {
+			$password =  md5($this->input->post('password'));			
+		} else {$password = $data['password'];}
 
 		$email = $this->input->post('email');
-		if( (!stristr($email,"@") OR !stristr($email,"."))){
- 				redirect('profil');
+		if ((!stristr($email,"@") OR !stristr($email,"."))){
+ 			redirect('profil');
  		}
+
 		$updatedAt	 = date('Y-m-d G:i:s');;
 		$data = array(
 			'nama' => $nama,
@@ -126,14 +143,14 @@ class User extends CI_Controller {
 			'updatedAt' => $updatedAt
 			);
 		
-		$where = array('id' => $id);
 
-		$u = array(	'username '=> $username);
-		$user = $this->Model_user->unique_check( $u,"user");
-		$self = $this->Model_user->check( $u,"user")->row_array();
+		$where_username = array(	'username '=> $username);
+		$user = $this->Model_user->unique_check( $where_username,"user");
+		$self = $this->Model_user->check( $where_username,"user")->row_array();
 
-		if($user == 0 || $username == $self['username'])
-			{$this->Model_user->update_data($where,$data,'user');}
+		if ($user == 0 || $username == $self['username']){
+			$this->Model_user->update_data($where,$data,'user');
+		}
 	
 		redirect('profil');
 	}
@@ -142,16 +159,29 @@ class User extends CI_Controller {
 		$data['user']=$this->Model_user->count_user();
 		$data['url']=$this->Model_user->count_url();
 		$id = $this->session->userdata('id');
+
+		$dataUrl = $this->Model_user->get_table('url')->result();
+			$chartLabel = [];
+			$chartValue = [];
+
+		foreach($dataUrl as $row) {
+			array_push($chartLabel, $row->short_url);
+			array_push($chartValue, $row->hit);
+		}
+
+		$data['chartLabel'] = json_encode($chartLabel);
+		$data['chartValue'] = json_encode($chartValue);
 		$data['most_visited_mine'] = $this->Model_user->count_max_user($id);
-	
 		$data['most_visited']=$this->Model_user->count_max();
+		
 		$this->load->view('admin_panel/header',$data);
 		$this->load->view('admin_panel/side_bar',$data);
 		$this->load->view('admin_panel/admin_dashboard',$data);
 		$this->load->view('admin_panel/footer',$data);		
 	}
 
-	public function get_data_user(){
+	public function get_data_user()
+	{
 		$this->load->view('admin_panel/header');
 		$this->load->view('admin_panel/side_bar');
 		$this->load->view('user/input');
@@ -159,18 +189,19 @@ class User extends CI_Controller {
 	} 
 
 
-	function add_user(){						
+	function add_user()
+	{						
 		$nama = $this->input->post('nama');
 		$username = $this->input->post('username');
 		$password = md5($this->input->post('password'));
  		$email = $this->input->post('email');
+ 	
  		if( (!stristr($email,"@") OR !stristr($email,"."))){
  				redirect('tambah_user');
  		}
 
 		$is_admin = $this->input->post('is_admin');
 		$updatedAt	 = date('Y-m-d G:i:s');;
-
 		$data = array(
 			'nama' => $nama,
 			'username' => $username,
@@ -180,22 +211,22 @@ class User extends CI_Controller {
 			'updatedAt' => $updatedAt
 		);
 
-		$u = array(	'username '=> $username);
+		$where_username = array('username '=> $username);
+		$user = $this->Model_user->unique_check( $where_userame,"user");
 
-		$user = $this->Model_user->unique_check( $u,"user");
-
-		if(  $user != 0  )
-			{redirect('tambah_user');}
-		else			
-			{$this->Model_user->input_data($data,'user');
-			redirect('tampilkan_user');}
-
+		if ($user != 0)
+			redirect('tambah_user');
+		else {
+			$this->Model_user->input_data($data,'user');
+			redirect('tampilkan_user');
+		}
 	}	
 
 	function edit_user($id){
 		$where = array('id' => $id);
 		$data['user'] = 
 			$this->Model_user->check($where,'user')->result();
+		
 		$this->load->view('admin_panel/header', $data, FALSE);
 		$this->load->view('admin_panel/side_bar', $data, FALSE);
 		$this->load->view('user/edit',$data);
@@ -213,16 +244,16 @@ class User extends CI_Controller {
 		$nama=$this->input->post('nama');
 		$username= $this->input->post('username');
 		$password=$this->input->post('password');
-
 		$email = $this->input->post('email');
 		$is_admin = $this->input->post('is_admin');
 		$data=$this->Model_user->check( $id,'user')->row_array();
 		
-		if( md5($this->input->post('password')) == $data['password']){
-				$password = $data['password'] ||empty( md5($password));
-		}else {
-				$password =  md5($this->input->post('password'));
+		if (md5($this->input->post('password')) == $data['password']) {
+			$password = $data['password'] ||empty( md5($password));
+		} else {
+			$password =  md5($this->input->post('password'));
 		}
+
 		$data = array(
 			'nama' => $nama,
 			'username' => $username,
@@ -230,28 +261,32 @@ class User extends CI_Controller {
 			'email' => $email,
 			'is_admin' => $is_admin,
 			'updatedAt' => date('Y-m-d G:i:s')
-			);
-		$where = array('id' => $id);
+		);
 		
-		$u = array(	'username '=> $id);
-		$user = $this->Model_user->unique_check( $u,"user");
+		$where = array('id' => $id);
+		$where_username = array('username'=> $username);
+		$user = $this->Model_user->unique_check( $where_username,"user");
 	
-		if($user == 0  )
-			{ $this->Model_user->update_data($where,$data,'user');
-			 }
+		if ($user == 0){ 
+			$this->Model_user->update_data($where,$data,'user');
+		}
+		
 		redirect('tampilkan_user');
 	}
 
-	public function show_url(){
+	public function show_url()
+	{
 		$id = array('id_user'=> $this->session->userdata('id'));
 		$data['user'] = $this->Model_user->check($id,'url')->result();
+	
 		$this->load->view('admin_panel/header', $data, FALSE);
 		$this->load->view('admin_panel/side_bar', $data, FALSE);
 		$this->load->view('url/show', $data, FALSE);
 		$this->load->view('admin_panel/footer', $data, FALSE);
 	}
 
-	public function get_data_url(){
+	public function get_data_url()
+	{
 		$this->load->view('admin_panel/header');
 		$this->load->view('admin_panel/side_bar');
 		$this->load->view('url/input');
@@ -259,37 +294,35 @@ class User extends CI_Controller {
 	} 
 
 	
-	function random_string($length = 10) {
+	function random_string($length = 10) 
+	{
    		$random=  substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
 
    		$check=$this->Model_user->unique_check(['short_url'=>$random],'url'); 	
-   			if($check >0)
-   				{return $this->random_string();
-   			}else
-   			{ return $random;}
+   	
+   			if ($check >0)
+   				return $this->random_string();
+   			else 
+   				return $random;
    	}
 	
 
 	function add_url(){
 		$url = $this->input->post('url');
-
-		if(!filter_var($url, FILTER_VALIDATE_URL)){
+		if (!filter_var($url, FILTER_VALIDATE_URL)) {
 			redirect('tambah_url');
-
 		}
 
 		$id_user = $this->session->userdata('id');
 		$short = $this->random_string();
 		$url = $this->input->post('url');
-
-		$updatedAt	 = date('Y-m-d G:i:s');;
-		
+		$updatedAt	 = date('Y-m-d G:i:s');
 		$data = array(
 			'id_user' => $id_user,
 			'short_url' =>$short,
 			'url' => $url,
 			'updatedAt' => $updatedAt
-			);
+		);
 
 		$this->Model_user->input_data($data,'url');
 		redirect('url');
@@ -306,7 +339,8 @@ class User extends CI_Controller {
 	function edit_url($id){
 		$where = array('id' => $id);
 		$data['user'] = 
-		$this->Model_user->check($where,'url')->result();
+			$this->Model_user->check($where,'url')->result();
+		
 		$this->load->view('admin_panel/header', $data, FALSE);
 		$this->load->view('admin_panel/side_bar', $data, FALSE);
 		$this->load->view('url/edit',$data);
@@ -320,22 +354,19 @@ class User extends CI_Controller {
 		$updatedAt	 = date('Y-m-d G:i:s');
 		$hit = intval($this->input->post('hit'));
 		$hit++;
-		// var_dump($hit) or die;
 		$data = array(
 			'id_user' => $id_user,
 			'short_url' => $short_url,
 			'hit' => $hit,
-			'updatedAt'=> $updatedAt,
-			             
-			);
-		
+			'updatedAt'=> $updatedAt,	             
+		);		
 		$where = array('id' => $id);
-
 
 		$this->form_validation->set_rules('short_url','Short Url','required|min_length[3]|max_length[25]|is_unique[url.short_url]');
  
-		if($this->form_validation->run() != false){
-		$this->Model_user->update_data($where,$data,'url');}
+		if ($this->form_validation->run() != false) 
+		$this->Model_user->update_data($where,$data,'url');
+
 		redirect('url');
 	}
 
@@ -346,6 +377,18 @@ class User extends CI_Controller {
 		$data['most_visited'] = $this->Model_user->count_max();
 		$data['most_visited_mine']=$this->Model_user->count_max_user($id);
 
+		$dataUrl = $this->Model_user->check(['id_user'=> $this->session->userdata('id')],'url')->result();
+			$chartLabel = [];
+			$chartValue = [];
+
+		foreach($dataUrl as $row) {
+			array_push($chartLabel, $row->short_url);
+			array_push($chartValue, $row->hit);
+		}
+
+		$data['chartLabel'] = json_encode($chartLabel);
+		$data['chartValue'] = json_encode($chartValue);
+		
 		$this->load->view('admin_panel/header',$data);
 		$this->load->view('admin_panel/side_bar',$data);
 		$this->load->view('admin_panel/user_dashboard',$data);

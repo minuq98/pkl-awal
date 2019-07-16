@@ -1,16 +1,4 @@
-	<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-?>
-<!DOCTYPE html>
-<html >
-<head>
-
-  <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/ringtone-music-instruments/512/letter-c-key-keyboard-2-512.png">
- <title>CRUD</title>
-  <!-- Author Meta -->
-  <style type="text/css">
-    @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
   width: 360px;
@@ -110,29 +98,3 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
-  </style>
-</head>
-<body>
-<div class="login-page">
-  <div class="form" >
-
-		<?php echo validation_errors(); ?>
-	<?php echo form_open('user/aksi'); ?>
-		<label>Nama</label><br/>
-		<input type="text" name="nama"><br/>
-		<label>Email</label><br/>
-		<input type="text" name="email"><br/>
-		<label>Konfirmasi Email</label><br/>
-		<input type="text" name="konfir_email"><br/>
-		<button  type="submit" >Simpan</button>
-	</form>
-
-  </div>
-</div>
-<script type="text/javascript">
-  $('.message a').click(function(){
-   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-});
-</script>
-</body>
-</html>

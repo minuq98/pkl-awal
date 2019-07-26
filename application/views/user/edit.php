@@ -52,6 +52,13 @@
                         </div>
                         <input type="email" name="email" value="<?php echo $u->email?>">
                      </div>
+                     <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                           <span class="input-group-text" id="basic-addon3">
+                           Jumlah Gagal Login</span>
+                        </div>
+                        <input type="number" name="count" value="<?php echo $u->count?>">
+                     </div>
                      <label>Jenis user</label> <br>
 			
                      <div class="input-group">

@@ -81,11 +81,10 @@
               <!-- List group links -->
                </div>
             </div>
-
             <div class="col-md-12 mb-4 ">
             <!--Card-->
                <div class="card mb-4">
-                  <div class="card card-header badge-primary">Data Seluruh User</div>
+                  <div class="card card-header text-center badge-primary">Data Seluruh User</div>
                   <!--Card content-->
                   <div class="card-body">
                      <a class="list-group-item list-group-item-action waves-effect">Jumlah
@@ -101,7 +100,263 @@
          </div>
           <!--/.Card-->     
          <?php } ?>
-      </div>
-      <!--Grid row-->
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-6 mb-4">
+
+          <!--Card-->
+          <div class="card">
+
+            <!-- Card header -->
+            <div class="card-header text-center badge-primary">Data Login</div>
+
+            <!--Card content-->
+            <div class="card-body">
+
+              <canvas id="login"></canvas> 
+                    <form action='<?= base_url('detail') ?>' method="post">
+                             <button class="btn btn-outline-success" type="submit" value="login" name="title"> <i class="fa fa-eye"> </i> Tampilkan Detail </button>
+                    </form>
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+      <div class="col-lg-12 col-md-6 mb-4">
+
+          <!--Card-->
+          <div class="card">
+
+            <!-- Card header -->
+            <div class="card-header text-center badge-primary">Data Redirect
+            </div>
+
+            <!--Card content-->
+            <div class="card-body " >
+                <canvas id="redirect" ></canvas>          
+              
+                <form action='<?= base_url('detail') ?>' method="post">
+                    
+                    <button class="btn btn-outline-success" name="title"  type="submit" value="redirect"> <i class="fa fa-eye"> </i> Tampilkan Detail</button>
+
+                </form>
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+
    </main>
    <!--Main layout-->
+<!-- or -->
+
+</body>
+   <footer class=" page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn ">
+    <!--Call to action-->
+      <div class="pt-2">
+         <hr class="my-2">
+            <a class="btn btn-outline-white" href="#" target="_blank" role="button">   Belajar CODEIGNITER
+               <i class="fas fa-graduation-cap ml-2"></i>
+            </a>
+      </div>
+      <!--/.Call to action-->
+      <hr class="my-2">
+      <!-- Social icons -->
+      <div class="pb-3  ">
+         <a href="https:www.facebook.com/mdbootstrap" target="_blank">
+            <i class="fab fa-facebook-f mr-3"></i>
+         </a>
+         <a href="https:twitter.com/MDBootstrap" target="_blank">
+           <i class="fab fa-twitter mr-3"></i>
+         </a>
+         <a href="https:www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+           <i class="fab fa-youtube mr-3"></i>
+         </a>
+         <a href="https:plus.google.com/u/0/b/107863090883699620484" target="_blank">
+           <i class="fab fa-google-plus mr-3"></i>
+         </a>
+         <a href="https:dribbble.com/mdbootstrap" target="_blank">
+           <i class="fab fa-dribbble mr-3"></i>
+         </a>
+         <a href="https:pinterest.com/mdbootstrap" target="_blank">
+           <i class="fab fa-pinterest mr-3"></i>
+         </a>
+         <a href="https:github.com/mdbootstrap/bootstrap-material-design" target="_blank">
+           <i class="fab fa-github mr-3"></i>
+         </a>
+         <a href="http:codepen.io/mdbootstrap/" target="_blank">
+           <i class="fab fa-codepen mr-3"></i>
+         </a>
+      </div>
+      <div class="footer-copyright py-3"></div>
+  </footer>
+  <!--/.Footer-->
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="<?php echo base_url();?>/assets/js/jquery-3.4.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="<?php echo base_url();?>assets/js/mdb.min.js"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    new WOW().init();
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: <?= $chartLabel ?>,
+        datasets: [{
+          label: '5 top visited short url',
+          data: <?= $chartValue ?>,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
+
+var colors = ["rgb(54, 162, 235)", 
+            "rgba(255, 159, 64)",
+             "rgb(255, 99, 132)",  
+             "rgb(153, 102, 255)"
+     ];
+
+ var redirect = document.getElementById("redirect");
+ var chartData = {
+   labels: <?= $waktuRedirect ?>,
+   datasets: [{
+     label :["info"],
+     data: <?= $infoRedirect ?>,
+     backgroundColor: colors[0]
+   },
+   {
+     label :["warning"],
+     data: <?= $warningRedirect ?>,
+     backgroundColor: colors[1]
+   },
+   {
+     label :["critical"],
+     data: <?= $criticalRedirect ?>,
+     backgroundColor: colors[2]
+   },
+   {
+     label :["debug"],
+     data: <?= $debugRedirect ?>,
+     backgroundColor: colors[3]
+   }
+   ]
+ };
+
+ if (redirect) {
+   new Chart(redirect, {
+   type: 'bar',
+   data: chartData,
+   options: {
+     scales: {
+       xAxes: [{
+         barPercentage: 0.9,
+         categoryPercentage: 0.8 
+       }],
+       yAxes: [{
+         ticks: {
+           beginAtZero: false
+         }
+       }]
+     },
+    
+     end: {
+       display: false
+     }
+   }
+   });
+ }
+
+var login = document.getElementById("login");
+ var chartData = {
+   labels: <?= $waktuLogin ?>,
+   datasets: [{
+     label :["info"],
+     data: <?= $infoLogin ?>,
+     backgroundColor: colors[0]
+   },
+   {
+     label :["warning"],
+     data: <?= $warningLogin ?>,
+     backgroundColor: colors[1]
+   },
+   {
+     label :["critical"],
+     data: <?= $criticalLogin ?>,
+     backgroundColor: colors[2]
+   },
+   {
+     label :["debug"],
+     data: <?= $debugLogin ?>,
+     backgroundColor: colors[3]
+   }
+   ]
+ };
+
+ if (login) {
+   new Chart(login, {
+   type: 'bar',
+   data: chartData,
+   options: {
+     scales: {
+       xAxes: [{
+         barPercentage: 0.9,
+         categoryPercentage: 0.8 
+       }],
+       yAxes: [{
+         ticks: {
+           beginAtZero: false
+         }
+       }]
+     },
+    
+     end: {
+       display: false
+     }
+   }
+   });
+ }
+
+         //line
+
+
+  </script>
+
+</html>

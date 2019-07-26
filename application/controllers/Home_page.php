@@ -11,48 +11,63 @@ class Home_page extends CI_Controller {
 	public function index()	
 	{
 		$this->load->view('landing');
-	}
+	}	
 
-	public function log($title,$type)
+	public function log($title,$type,$detail)
 	{
 		if ($this->agent->is_browser()) {
-			$agent = $this->agent->browser().' '.$this->agent->version();
-			$description = [
+			$agent = $this->agent->browser();
+
+			$desc = [
 				'ip' => $this->input->ip_address(),
 				'browser' => $agent,
-				'platform' => $this->agent->platform
+				'version' =>$this->agent->version(),
+				'platform' => $this->agent->platform(),
 			];
 			$data = array(
-			'title'=>$title,
-			'descript'=>json_encode($description),
-			'type'=>$type,
-			'createdAt'=>date('Y-m-d G:i:s'));
-			$this->Model_user->input_data($data,'logger');
+				'title'=>$title,
+				'descript'=>json_encode(array_merge($desc,$detail)),
+				'type'=>$type,
+				'createdAt'=>date('Y-m-d G:i:s'),
+				
+			);
+			 $this->Model_user->input_data($data,'logger');
 		} elseif ($this->agent->is_mobile()) {			
 			$agent = $this->agent->mobile();
+			$desc = [
+				'ip' => $this->input->ip_address(),
+				'mobile' => $agent,
+				'platform' => $this->agent->platform(),
+			];
 			$data = array(
-				'title'=>$title,
-				'descript'=>json_encode(array($this->input->ip_address(),$agent,$this->agent->platform())),
-				'type'=>$type,
-				'createdAt'=>date('Y-m-d G:i:s')
+				'title' => $title,
+				'descript' => json_encode(array_merge($desc,$detail)),
+				'type' => $type,
+				'createdAt' => date('Y-m-d G:i:s')
 			);
-			$this->Model_user->input_data($data,'logger');			
+			return $data;
+			 $this->Model_user->input_data($data,'logger');			
 		} else {
 			$agent = 'Data user gagal di dapatkan';
 		}
+
 	}
 
 	public function shorturl($short)
 	{
 		$url = $this->Model_user->get_short_url($short);
-		if ($url->num_rows() == 1	) {
-			$access = intval($url->row()->hit);
-			
-			$data= array('hit' => $access+1);		
+		if ($url->num_rows() > 0	) {
+			// echo $url->num_rows();exit;
+			$access = $url->row()->hit;
+			// $this->log('redirect','info',['url' => $url->row()->url]);
+			$data= array('hit' => $access + 1);		
 			$short = array('short_url' => $short);
-			$hit = $this->Model_user->update_data($short ,$data , 'url');
+			$this->Model_user->update_data($short ,$data ,'url');
 
-			$this->load->view('countdown', ['url' => $url->row()]);			
+			// $logData = $this->log('redirect','info',['url' => $url->row()->url]);
+			// $this->Model_user->input_data($logData,'logger');	
+
+			$this->load->view('countdown', ['url' => $url->row()]);
 		} else {
 			echo show_404();
 		}
@@ -84,20 +99,21 @@ class Home_page extends CI_Controller {
 				);
  
 			$this->session->set_userdata($data_session);
- 			$this->log('login','info');
+ 			$this->log('login','info',array('user' => $is['username']));
  				if ( $is['is_admin']=="admin") 			
 					redirect(base_url("beranda_admin"));
  				else
  					redirect(base_url("beranda_user"));
 
-		} else if ( $admin->row_array()['count'] == 3) 
+		} else if ( $admin->row_array()['count'] == 3){ 
 			$this->load->view('errors/html/terblokir');
-		else if ( $admin->num_rows() == 1 && $user->num_rows() == 0 && $admin->row_array()['is_admin'] !== 'admin' ) {
+			$this->log('login','warning',array_merge($where,['inform' => 'Terbanned']));
+		} else if ( $admin->num_rows() == 1 && $user->num_rows() == 0 && $admin->row_array()['is_admin'] !== 'admin' ) {
 			$data = $admin->row_array()['count'];
 			$data++;
 			$this->Model_user->update_data(['username'=>$username],['count'=> $data],'user');		
 			$this->session->set_flashdata('errorLogin', true);
-			$this->log('Gagal Log in','warning');
+			$this->log('Gagal Log in','warning',array_merge($where,['inform' => 'gagal_login']));
 			$this->load->view('admin_panel/login');			
 		} else {
 			$this->session->set_flashdata('errorLogin', true);

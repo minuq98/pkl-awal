@@ -1,4 +1,4 @@
-  <!--Main layout-->
+  
    <main class="pt-5 mx-lg-5">
       <div class="container-fluid mt-5">
       <!-- Heading -->
@@ -10,13 +10,14 @@
                   <span>/</span>
                   <span>Url</span>
                </h4>
-               <form class="d-flex justify-content-between" name="form_search" action="<?php echo base_url('log') ;?>" method="post">
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+               <form class="d-flex justify-content-between" name="form_search" action="<?php echo base_url('log') ;?>">
                <!-- Default input -->
                   <input type="search" required name="key" class="form-control" id="basic-url" placeholder="Type Your Query" aria-describedby="basic-addon3">
 
-                  <button class="btn btn-primary btn-sm my-0 p" type="submit" name="submit" value="submit" title="Search "><i class="fa fa-search"></i></button>
+                  <button class="btn btn-primary btn-sm my-0 p" type="submit"  title="Search "><i class="fa fa-search"></i></button>
                </form>
-               <form method="post" class="d-flex justify-content-end" action="<?php base_url('log') ;?>">
+               <form method="get" class="d-flex justify-content-end" action="<?php base_url('log') ;?>">
                   <button class="btn btn-danger btn-sm my-0 p" type="submit" name="reset" value="reset" title="Reset Search Result"><i class="fa fa-times"></i></button>
                </form>
             </div>
@@ -29,26 +30,58 @@
             <!--Card-->
                <div class="card">
                <!--Card content-->
+
+                           </td>
                   <div class="card-body">
                      <center>
-                     <table class="table table-hover tabe ">
-                        <thead class="blue lighten-4">
-                           <tr>
+                     <table class="table table-hover table-inverse ">
+                        <thead class="blue lighten-2">
+                           <tr class="text-capitalize text-white">
 			                     <th>No</th>
-			                     <th>Tipe Log</th>
-			                     <th>Data</th>
-			                     <th>Level</th>
+			                     <th>Tipe</th>
+			                     <th class="text-center">Data</th>
+			                     <th >Level</th>
 			                     <th>Dibuat</th>
                            </tr>
                         </thead>
-		                   <?php $no = $page+1 ;
+		                   <?php $no = $page*5+1 ;
                         foreach($user as $u){ ?>
-                        <tbody>
-                           <tr>
-			                     <td><?php echo $no++ ;?></td>
-			                     <td><?php echo $u->title; ?></td>
-			                     <td><?php echo $u->descript; ?></td>
-			                     <td><?php echo $u->type ;?></td>
+                        <tbody >
+                           <tr >
+			                     <td ><?php echo $no++ ;?></td>
+			                     <td ><?php echo $u->title; ?></td>
+			                     <td ><?php echo $u->descript; ?>
+                              <br>    <!-- The Modal -->
+                             
+                              <button class="btn btn-outline-primary " style="
+                                        width: 30px;
+                                        height: 30px;
+                                        padding: 6px 0px;
+                                        border-radius: 15px;
+                                        line-height: 1.42857;
+                                "data-toggle="modal" data-target="#myModal"> <i class="fa fa-plus"> </i> </button>
+                                      <div class="modal fade" id="myModal">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                          <div class="modal-content">
+                                            <div class="modal-header badge-info ">
+                                              Detail                                        <button class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true" class="text-white">
+                                                &times;
+                                              </span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                
+                                                &emsp;&emsp;&emsp;&emsp;{ <br>
+                                                <?php $a= json_decode($u->descript);
+                                                  foreach ($a as $key=>$value) {
+                                                    echo '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"'.$key.'" => "'.$value.'",<br>';
+                                                  }
+                                                ?>
+                                                &emsp;&emsp;&emsp;&emsp;}
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                            <td><?php echo $u->type ;?></td>
 			                     <td><?php echo $u->createdAt ;?></td>
                            </tr>
                         </tbody>

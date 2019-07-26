@@ -15,7 +15,9 @@
   <link href="<?php echo base_url();?>assets/css/mdb.min.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
   <link href="<?php echo base_url();?>assets/css/style.min.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?> assets/css/my_custom/map.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/my_custom/map.css">
+
+
 </head>
 
 <body class="grey lighten-3">
@@ -38,12 +40,13 @@
             <ul class="navbar-nav nav-flex-icons">
                <li class="nav-item">
                  <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
-                   <strong class="green-text"><?php  echo ucfirst($this->session->userdata('is')); ?></strong>
+                   <strong class="green-text">
+                    <?php  echo ucfirst($this->session->userdata('is')); ?>
+                    </strong>
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="<?php  echo base_url('keluar') ?>" class="nav-link border border-light rounded waves-effect"
-                 >
+                 <a href="<?php  echo base_url('keluar') ?>" class="nav-link border border-light rounded waves-effect">
                    <i class="fab fa-github mr-2"></i>Log Out
                  </a>
                </li>

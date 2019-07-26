@@ -6,6 +6,7 @@ class Model_user extends CI_Model {
 	function input_data($data,$table)
 	{
 		$this->db->insert($table,$data);
+		
 	}
 
 	function logger_data($number,$offset,$key = '')
@@ -85,6 +86,18 @@ class Model_user extends CI_Model {
 	{
 		$this->db->where(['short_url' => $short]);
 		return $this->db->get('url');
+	}
+
+	function get_logger($where)
+	{
+		$query = "select date, count(type) total, 
+				sum(case when type='info' then total else 0 end) as info,
+				sum(case when type='warning' then total else 0 end) as warning, 
+				sum(case when type='debug' then total else 0 end) as debug, 
+				sum(case when type='critical' then total else 0 end) as critical 
+				from ( select date(createdAt) date, type, count(*) total from logger where title = ? and date(createdAt) >= DATE_ADD(current_date(), INTERVAL -7 day) group by date(createdAt), type ) sub group by date order by date";
+		 
+				return $this->db->query($query,$where)->result();
 	}
 }
 

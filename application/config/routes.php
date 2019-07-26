@@ -61,6 +61,8 @@ $route['aksi_user'] ='user/add_user';
 $route['ubah_user/(:num)'] ='user/edit_user/$1';
 $route['hapus_user/(:num)'] ='user/delete_user/$1';
 $route['ubah_user'] = 'user/update_user';
+$route['detail'] = 'user/detail';
+$route['detail/(:any)'] = 'user/detail/$1';
 
 $route['beranda_user'] ='user/dashboard_user';
 $route['url'] ='user/show_url';

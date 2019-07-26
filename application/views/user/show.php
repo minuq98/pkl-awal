@@ -25,7 +25,7 @@
 		               <a class="btn btn-primary " href="<?php echo base_url('tambah_user') ?>" > <i class="fas fa-plus"></i>Tambah</a>
                   </center><br>
 	                  <table class="table table-hover">
-		               <thead class="blue lighten-4 text-center">
+		               <thead class="blue lighten-2 text-capitalize text-center text-white">
                   		<tr>
                   			<th>No</th>
                   			<th>Nama Lengkap</th>
@@ -34,6 +34,7 @@
                   			<th>Jenis User</th>
                   			<th>Dibuat </th>
                   			<th>Diupdate</th>
+                           <th>Gagal Terhitung</th>
                   			<th>Aksi</th>						
                   		</tr>
                   	</thead>
@@ -48,6 +49,7 @@
                   			<td><?php echo $u->is_admin ?></td>
                   			<td><?php echo $u->createdAt ?></td>
                   			<td><?php echo $u->updatedAt ?></td>
+                           <td><?= $u->count   ?></td>
                   			<td><center>
                   			<a class="btn btn-warning" href="<?php echo base_url('ubah_user/').$u->id; ?>" ><i class="fa fa-paper-plane"></i> EDIT</a>
                   			<a class="btn btn-danger" href="<?php echo base_url('hapus_user/').$u->id; ?>"><i class="fa fa-eraser"></i> Hapus</a></center></td>

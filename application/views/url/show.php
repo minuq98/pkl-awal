@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="<?= base_url() ?> assets/css/my_custom/show_url.css">
-</header>
   <!--Main layout-->
 <body>
    <main class="pt-5 mx-lg-5">
@@ -27,8 +25,9 @@
                      <center>
                      <a class="btn btn-primary " href="<?php echo base_url('tambah_url') ?>" > <i class="fas fa-plus"></i>Tambah</a>
                      </center><br>
-	                  <table id="url" class="table table-striped table-bordered table-sm " cellspacing="0" width="100%">
-                        <thead class="blue lighten-4">
+                     <div class="data-simplebar">
+	                  <table id="url" class="table table-striped  table-sm " cellspacing="0" width="100%">
+                        <thead class="blue lighten-2 text-capitalize text-center text-white">
 				               <tr>
 			                     <th>No</th>
 			                     <th>URL Pendek</th>
@@ -57,6 +56,7 @@
 		                  </tbody>
 		               <?php } ?>
 	                  </table>
+                     </div>
                   </div>
                </div>
                <!--/.Card-->

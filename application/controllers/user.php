@@ -17,14 +17,14 @@ class User extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('s');
+		$this->load->view('s');	
 	}
 
 	public function pagination()
 	{
 		$this->load->library('Pagination');
 		
-		$config['per_page']	= 5;
+		$config['per_page']	= 10;
  		$config['first_link']       = 'First';	
         $config['last_link']        = 'Last';
         $config['next_link']        = 'Next';
@@ -44,35 +44,37 @@ class User extends CI_Controller {
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
         
+        
         return $config;
 	}
 
 	public function logger($row_no=0)
 	{
 		$search_text ="";
-		
-       	if ($this->input->post('submit') != null) {			
-			$search_text= $this->input->post('key');
-			$this->session->set_userdata(array('key' => $search_text));
+		if (count($_GET) > 0){
+		 	$config['suffix'] =  http_build_query($_GET, '', "&");
+			$search_text = $this->input->get('key');		
 		}
 
-		if ($this->input->post('reset') != null) {
-			$this->session->unset_userdata('key');			
-		}
-
-		if($this->session->userdata('key') != null) {
-			$search_text = $this->session->userdata('key');
-		}
-
+  		
    		$config = $this->pagination();
  	   	$count = $this->Model_user->count_logger($search_text);
 		
+		$config['use_page_numbers'] = true;
 		$config['base_url'] = base_url('log');
+		$config['page_query_string'] = true;
+		$config['query_string_segment'] = 'page';
+		$config['reuse_query_string'] = true;
+		if($this->input->post('reset') != null){
+			$config['reuse_query_string'] = false;
+		}
 		$config['total_rows'] = $count;
 		$this->pagination->initialize($config);
+	
+		$data['page'] = $this->input->get('page');
 		
-		$data['page'] =  $this->uri->segment(2);
  		$data['user']=$this->Model_user->logger_data($config['per_page'],$data['page'],$search_text);
+
 		
 		$this->load->view('admin_panel/header', $data, FALSE);
 		$this->load->view('admin_panel/side_bar', $data, FALSE);
@@ -103,7 +105,6 @@ class User extends CI_Controller {
 	 	$this->load->view('admin_panel/side_bar',$data);
 	 	$this->load->view('profile/show',$data);
 	 	$this->load->view('admin_panel/footer',$data);
-
 	 }
 
 	public function edit_profile(){
@@ -164,22 +165,123 @@ class User extends CI_Controller {
 			$chartLabel = [];
 			$chartValue = [];
 
+		$redirect = $this->Model_user->get_logger('redirect');
+			$infoRedirect = [];
+			$warningRedirect = [];
+			$criticalRedirect = [];
+			$debugRedirect = [];
+			$waktuRedirect = [];
+
+		$login =$this->Model_user->get_logger('login');
+			$infoLogin = [];
+			$warningLogin =[];
+			$criticalLogin =[];
+			$debugLogin = [];
+			$waktuLogin =[];
+
+
 		foreach($dataUrl as $row) {
 			array_push($chartLabel, $row->short_url);
 			array_push($chartValue, $row->hit);
 		}
 
+		foreach ($redirect as $row) {
+			if($row->date != date('Y-m-d')){
+				array_push($infoRedirect, $row->info);
+				array_push($warningRedirect, $row->warning);
+				array_push($criticalRedirect, $row->critical);
+				array_push($debugRedirect, $row->debug);
+				array_push($waktuRedirect , $row->date);
+			} 
+
+		}
+
+		foreach ($login as $row) {
+			if ( $row->date !=  date('Y-m-d') ) {	
+				array_push($infoLogin, $row->info);
+				array_push($warningLogin, $row->warning);
+				array_push($criticalLogin, $row->critical);
+				array_push($debugLogin, $row->debug);
+				array_push($waktuLogin, $row->date);
+			} 
+
+		}
+
 		$data['chartLabel'] = json_encode($chartLabel);
 		$data['chartValue'] = json_encode($chartValue);
+
+		$data['infoLogin'] =json_encode($infoLogin);
+		$data['warningLogin'] = json_encode($warningLogin);
+		$data['criticalLogin'] = json_encode($criticalLogin);
+		$data['debugLogin']= json_encode($debugLogin);
+		$data['waktuLogin'] =json_encode($waktuLogin);
+
+		$data['infoRedirect'] =json_encode($infoRedirect);
+		$data['warningRedirect'] = json_encode($warningRedirect);
+		$data['criticalRedirect'] = json_encode($criticalRedirect);
+		$data['debugRedirect']= json_encode($debugRedirect);
+		$data['waktuRedirect']	= json_encode($waktuRedirect);	
+
 		$data['most_visited_mine'] = $this->Model_user->count_max_user($id);
 		$data['most_visited']=$this->Model_user->count_max();
-		
+
 		$this->load->view('admin_panel/header',$data);
 		$this->load->view('admin_panel/side_bar',$data);
 		$this->load->view('admin_panel/admin_dashboard',$data);
-		$this->load->view('admin_panel/footer',$data);		
+
 	}
 
+
+	public function detail()
+	{ 
+
+		$data['title'] = $this->input->post('title');		
+		$date = date('Y-m-d'); 
+		
+		if($this->input->post('date') != null) {
+			$date = $this->input->post('date');
+		}
+
+
+		$where = array(
+			'date_format(createdAt,"%Y-%m-%d")' => $date,
+			'title' => $data['title']
+		);
+		$data['data'] =$this->Model_user->check($where,'logger')->result();
+		$waktu = [];
+		$count = [];
+		$log =[];
+
+			$i=0;
+		foreach ($data['data'] as $row) {
+			$desc = json_decode($row->descript);
+			array_push($log, $desc);
+
+			if ( in_array(date("H", strtotime($row->createdAt)), $waktu)   ){
+				$add = end($count)+1;				
+				array_pop($count);
+				array_push($count, $add);
+
+			} else {
+			array_push($waktu, date("H", strtotime($row->createdAt)) );
+			array_push($count, 1);
+			}
+			$i++;
+
+
+		}
+		$data['waktu'] = json_encode($waktu);
+		$data['count'] = json_encode($count);
+		$data['log'] = $log;
+		$data['dateJson'] =json_encode($date);
+		$data['date'] = $date;
+		
+		$this->load->view('admin_panel/header',$data);
+		$this->load->view('admin_panel/side_bar',$data);
+		$this->load->view('admin_panel/detail', $data);
+	
+
+	}
 	public function get_data_user()
 	{
 		$this->load->view('admin_panel/header');
@@ -190,7 +292,7 @@ class User extends CI_Controller {
 
 
 	function add_user()
-	{						
+	{	
 		$nama = $this->input->post('nama');
 		$username = $this->input->post('username');
 		$password = md5($this->input->post('password'));
@@ -201,7 +303,7 @@ class User extends CI_Controller {
  		}
 
 		$is_admin = $this->input->post('is_admin');
-		$updatedAt	 = date('Y-m-d G:i:s');;
+		$updatedAt	 = date('Y-m-d G:i:s');
 		$data = array(
 			'nama' => $nama,
 			'username' => $username,
@@ -247,7 +349,7 @@ class User extends CI_Controller {
 		$email = $this->input->post('email');
 		$is_admin = $this->input->post('is_admin');
 		$data=$this->Model_user->check( $id,'user')->row_array();
-		
+		$count = $this->input->post('count');
 		if (md5($this->input->post('password')) == $data['password']) {
 			$password = $data['password'] ||empty( md5($password));
 		} else {
@@ -260,12 +362,14 @@ class User extends CI_Controller {
 			'password' => $password,
 			'email' => $email,
 			'is_admin' => $is_admin,
+			'count' => $count,
 			'updatedAt' => date('Y-m-d G:i:s')
 		);
 		
+
 		$where = array('id' => $id);
 		$where_username = array('username'=> $username);
-		$user = $this->Model_user->unique_check( $where_username,"user");
+		$user = $this->Model_user->unique_check( $id,"user");
 	
 		if ($user == 0){ 
 			$this->Model_user->update_data($where,$data,'user');
@@ -353,7 +457,7 @@ class User extends CI_Controller {
 		$short_url =$this->input->post('short_url');
 		$updatedAt	 = date('Y-m-d G:i:s');
 		$hit = intval($this->input->post('hit'));
-		$hit++;
+		
 		$data = array(
 			'id_user' => $id_user,
 			'short_url' => $short_url,
@@ -392,7 +496,7 @@ class User extends CI_Controller {
 		$this->load->view('admin_panel/header',$data);
 		$this->load->view('admin_panel/side_bar',$data);
 		$this->load->view('admin_panel/user_dashboard',$data);
-		$this->load->view('admin_panel/footer',$data);		
+		
 	}
 	
 

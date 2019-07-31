@@ -66,8 +66,6 @@ $route['aksi_url'] ='User/add_url';
 $route['ubah_url/(:num)'] ='User/edit_url/$1';
 $route['hapus_url/(:num)'] = 'User/delete_url/$1';
 $route['ubah_url'] = 'User/update_url';
-$route['log'] = 'User/logger';
-$route['log/(:any)'] = 'User/logger/$1';
 
 //home_page
 $route['halo'] ='Home_page/landing';
@@ -97,6 +95,8 @@ $route['hapus_user/(:num)'] ='Admin/delete_user/$1';
 $route['ubah_user'] = 'Admin/update_user';
 $route['detail'] = 'Admin/detail';
 $route['detail/(:any)'] = 'Admin/detail/$1';
+$route['log'] = 'Admin/logger';
+$route['log/(:any)'] = 'Admin/logger/$1';
 
 $route['(:any)'] = 'Home_page/shorturl/$1';
 

@@ -24,7 +24,7 @@ class User extends CI_Controller {
 	{
 		$this->load->library('Pagination');
 		
-		$config['per_page']	= 3;
+		$config['per_page']	= 7;
  		$config['first_link']       = 'First';	
         $config['last_link']        = 'Last';
         $config['next_link']        = 'Next';

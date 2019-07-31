@@ -6,7 +6,7 @@
            <!--Card content-->
            <div class="card-body d-sm-flex justify-content-between">
              <h4 class="mb-2 mb-sm-0 pt-1">
-               <a href="<?php echo base_url('beranda_user') ?>">Home Page </a>
+               <a href="<?= base_url('beranda_user') ?>">Home Page </a>
                <span>/</span>
                <span>Dashboard</span>
              </h4>
@@ -27,16 +27,23 @@
                   <?php  if($most_visited_mine == NULL){
                         echo 'Anda belum pernah menambahkan url apapun';
                         ?>
-                  <a class="btn btn-primary " href="<?php echo base_url('tambah_url') ?>" > <i class="fas fa-plus"> </i>   klik Untuk  Menambahkan Url</a></a>
+                  <a class="btn btn-primary " href="<?= base_url('tambah_url') ?>" > <i class="fas fa-plus"> </i>   klik Untuk  Menambahkan Url</a></a>
+               </div>
+            </div>
+          <!--/.Card-->
+        </div> 
+
+      </div>
+
                   <?php  } else { ?>
                      <canvas id="myChart"></canvas>
                         URL Teratas Anda
                      <span class="badge badge-primary">
-                        <?php echo strtoupper($most_visited_mine->short_url)  ;?>
+                        <?= strtoupper($most_visited_mine->short_url)  ;?>
                      </span>
                      Dengan 
                      <span class="badge badge-warning badge-pill ">
-                        <?php echo strtoupper($most_visited_mine->hit)  ;?>  
+                        <?php  echo strtoupper($most_visited_mine->hit) ?>  
                         <i class="fas fa-arrow-up ml-1"></i>
                      </span>
                      <span class="badge badge-danger">
@@ -68,12 +75,12 @@
                   </a>
                   <a class="list-group-item list-group-item-action waves-effect">
                      Oleh User  
-                     <span class="badge badge-danger"><?php      echo strtoupper($most_visited->username);?>
+                     <span class="badge badge-danger"><?php     echo strtoupper($most_visited->username);?>
                      </span>
                   </a>
                   <a class="list-group-item list-group-item-action waves-effect">Sebanyak
                      <span class="badge badge-pill  badge-success ">
-                        <?phpecho strtoupper($most_visited->hit);?> 
+                        <?= strtoupper($most_visited->hit);?> 
                         <i class="fas fa-arrow-up ml-1">Akses</i>
                      </span>
                 </a>
@@ -88,7 +95,7 @@
       <?php } ?>    
 
 <!-- or -->
-
+</main>
 </body>
    <footer class=" page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn ">
     <!--Call to action-->
@@ -132,13 +139,13 @@
   <!--/.Footer-->
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <script type="text/javascript" src="<?php echo base_url();?>/assets/js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="<?= base_url();?>/assets/js/jquery-3.4.1.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/popper.min.js"></script>
+  <script type="text/javascript" src="<?= base_url();?>assets/js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="<?= base_url();?>assets/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/mdb.min.js"></script>
+  <script type="text/javascript" src="<?= base_url();?>assets/js/mdb.min.js"></script>
   <!-- Initializations -->
   <script type="text/javascript">
     new WOW().init();
@@ -179,10 +186,6 @@
         }
       }
     });
-
-
-
-
   </script>
 
 </html>

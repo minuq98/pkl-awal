@@ -2,6 +2,8 @@
 <html>
    <head>
       <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/ringtone-music-instruments/512/letter-c-key-keyboard-2-512.png">
+            <link rel="dns-prefetch" type="text/css" href="<?=  $url->url ; ?>">
+
       <link rel="stylesheet" type="text/css" href="<?php echo base_url('') ;?>assets/css/my_custom/countDown.css">
       <title>CRUD</title>
    </head>
@@ -24,7 +26,7 @@
          <span></span>
          <span></span>
       </div>
-      <script type="text/javascript">
+<!--       <script type="text/javascript">
          var count = 3; // Timer
          var redirect = "/"; // Target URL
 
@@ -38,13 +40,25 @@
                window.location.href ='<?=  $url->url ; ?>';
             }
          }
+   
 
-      </script>
-      <h1 id='timer'>
-         <script type="text/javascript">
-            countDown();
-         </script>
+      </script> -->      
+      <form id="redirect" action="<?= base_url('redirect'); ?>" method="post">
+         <input type="hidden" name="url" value="<?= $url->url ?>">
+      </form>
+   <h1 id='timer'>
       </h1>
-
+         <script type="text/javascript">
+            var timeleft = 3;
+            var downloadTimer = setInterval(timer,1000);
+            function timer() {
+               document.getElementById("timer").innerHTML ="This page will redirect in " +timeleft + "seconds.";
+               timeleft =timeleft - 1;
+               if(timeleft <= 0) {
+                  clearInterval(downloadTimer);
+                  document.getElementById("redirect").submit();
+               }
+            }
+         </script>
    </body>
 </html> 

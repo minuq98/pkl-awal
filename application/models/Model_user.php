@@ -42,6 +42,11 @@ class Model_user extends CI_Model {
 		return $this->db->get_where($table,$where);
 	}
 
+	function get_limit($number, $offside, $where, $table)
+	{		
+		return $this->db->get_where($table,$where, $number, $offside);
+	}
+
 	function unique_check($where,$table)
 	{		
 		return $this->db->get_where($table,$where)->num_rows();

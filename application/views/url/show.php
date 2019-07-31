@@ -38,7 +38,7 @@
 		                     </tr>
 	                     </thead>
 		                  </tbody>
-                        <?php $no = 1;
+                        <?php $no = $from+1 ;
 		                   foreach ($user as $u) { ?>
 		                     <tr>
 			                     <td><?php echo $no++ ?></td>
@@ -56,7 +56,8 @@
 		                  </tbody>
 		               <?php } ?>
 	                  </table>
-                     </div>
+                       <?= $this->pagination->create_links();?>
+                       </div>
                   </div>
                </div>
                <!--/.Card-->

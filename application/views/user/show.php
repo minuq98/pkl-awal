@@ -38,7 +38,7 @@
                   			<th>Aksi</th>						
                   		</tr>
                   	</thead>
-		             <?php $no = 1;
+		             <?php $no = $from +1;
       		       foreach ($user as $u) { ?>
                		<tbody class="text-center ">
                   		<tr>
@@ -57,6 +57,13 @@
                      </tbody>
 		               <?php } ?>
 	                 </table>
+                                         <div class="row">
+                        <div class="col">
+                          <?php   echo $this->pagination->create_links();?>
+                           <!--Tampilkan pagination-->
+                        </div>
+                     </div>
+   
                   </div>
                </div>
              <!--/.Card-->

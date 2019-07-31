@@ -56,22 +56,33 @@ class Home_page extends CI_Controller {
 	public function shorturl($short)
 	{
 		$url = $this->Model_user->get_short_url($short);
-		if ($url->num_rows() > 0	) {
+		if ($url->num_rows() == 1 ) {
 			// echo $url->num_rows();exit;
-			$access = $url->row()->hit;
+			foreach ($url->result() as $row) {
+
+				$access = intval($row->hit);
+
+			}
+
 			// $this->log('redirect','info',['url' => $url->row()->url]);
 			$data= array('hit' => $access + 1);		
 			$short = array('short_url' => $short);
+
+			$this->log('redirect','info',['url' => $url->row()->url]);
+
 			$this->Model_user->update_data($short ,$data ,'url');
-
-			// $logData = $this->log('redirect','info',['url' => $url->row()->url]);
-			// $this->Model_user->input_data($logData,'logger');	
-
 			$this->load->view('countdown', ['url' => $url->row()]);
 		} else {
 			echo show_404();
 		}
 	}
+
+	public function redirect () {
+		$url = $this->input->post('url');
+
+		redirect($url);
+	}
+
 
 	public function login(){
 		$this->load->view('admin_panel/login');
@@ -127,61 +138,6 @@ class Home_page extends CI_Controller {
 	}
 
 
-
-
-
-/*	public function index() //called by default
-    	{
-    	//data to be sent to the view 🙂
-        $data = array(); 
-        if($this->input->post('url'))//did the user post a URL to be shorten?
-        {
-//            $this->load->model('short_url_model');//load the model which deals with data for short URLs
-            $short_url=$this->Model_url->store_long_url();//store the URL and get back the shorten URL
-            
-            if($short_url)//using PHP's awesome power
-            {
-                $data['short_url']=$short_url;
-            }
-            else //there was an error
-            {
-                $data['error']=validation_errors();
-            }
-        }
-
-        $this->load->view('get_url', $data);//load the single view get_url and send any data to it
-    }
-
-    public function get_shorty() //this function is called by the routes file using the 404_override 🙂
-    {
-        $this->load->model('Model_url'); //load the model for dealing with short URLs
-        $shorty=$this->uri->segment(1);//get the segment the user requested e.g. Nw from http://short.local/Nw
-         redirect($this->Model_url->get_long_url($shorty));//direct the user to the long URL the short URL is connected to 🙂 MAGIC
-    }
-
-    public function error_404() //a little error for when users enter an invalid short URL
-    {
-        $data['error']='Whoops cannot find that URL!';
-        $this->load->view('get_url', $data);//load our single view 🙂
-    }
-*/
-
-
-	// function a(){
-	// 	$this->load->view('v_form');
-	// }
-
-	// function aksi(){
-	// 	$this->form_validation->set_rules('nama','Nama','required');
-	// 	$this->form_validation->set_rules('email','Email','required');
-	// 	$this->form_validation->set_rules('konfir_email','Konfirmasi Email','required');
- 		 
-	// 	if($this->form_validation->run() != false){
-	// 		echo "Form validation oke";
-	// 	}else{
-	// 		$this->load->view('v_form');
-	// 	}
-	// }
 
 
 }

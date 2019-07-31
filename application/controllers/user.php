@@ -24,7 +24,7 @@ class User extends CI_Controller {
 	{
 		$this->load->library('Pagination');
 		
-		$config['per_page']	= 10;
+		$config['per_page']	= 3;
  		$config['first_link']       = 'First';	
         $config['last_link']        = 'Last';
         $config['next_link']        = 'Next';
@@ -48,7 +48,7 @@ class User extends CI_Controller {
         return $config;
 	}
 
-	public function logger($row_no=0)
+	public function logger()
 	{
 		$search_text ="";
 		if (count($_GET) > 0){
@@ -60,22 +60,21 @@ class User extends CI_Controller {
    		$config = $this->pagination();
  	   	$count = $this->Model_user->count_logger($search_text);
 		
-		$config['use_page_numbers'] = true;
+
 		$config['base_url'] = base_url('log');
-		$config['page_query_string'] = true;
-		$config['query_string_segment'] = 'page';
-		$config['reuse_query_string'] = true;
+			$config['reuse_query_string'] = true;
 		if($this->input->post('reset') != null){
 			$config['reuse_query_string'] = false;
 		}
 		$config['total_rows'] = $count;
 		$this->pagination->initialize($config);
 	
-		$data['page'] = $this->input->get('page');
-		
+		$data['page'] = $this->uri->segment(2);
+		$data['per_page'] = $config['per_page'];
  		$data['user']=$this->Model_user->logger_data($config['per_page'],$data['page'],$search_text);
 
-		
+
+
 		$this->load->view('admin_panel/header', $data, FALSE);
 		$this->load->view('admin_panel/side_bar', $data, FALSE);
 		$this->load->view('admin_panel/logger', $data);	
@@ -85,11 +84,21 @@ class User extends CI_Controller {
 	}
 
 	public function show_user()
-	{
-		$where = array('id !=' => $this->session->userdata('id'));
-		$data['user'] = 
-			$this->Model_user->check($where,"user")->result();		
+	{	
 		
+   		$config = $this->pagination();
+ 	   	$count = $this->Model_user->count_user();
+		
+		$config['base_url'] = base_url('tampilkan_user');
+	
+		$config['total_rows'] = $count;
+		$this->pagination->initialize($config);
+	
+		$where = array('id !=' => $this->session->userdata('id'));
+		$data['from'] = $this->uri->segment(2);
+ 		$data['user'] =  
+		$this->Model_user->get_limit($config['per_page'],$data['from'],$where,"user")->result();
+
 		$this->load->view('admin_panel/header', $data, FALSE);
 		$this->load->view('admin_panel/side_bar', $data, FALSE);
 		$this->load->view('user/show', $data, FALSE);
@@ -145,7 +154,7 @@ class User extends CI_Controller {
 			);
 		
 
-		$where_username = array(	'username '=> $username);
+		$where_username = array('username '=> $username);
 		$user = $this->Model_user->unique_check( $where_username,"user");
 		$self = $this->Model_user->check( $where_username,"user")->row_array();
 
@@ -239,7 +248,7 @@ class User extends CI_Controller {
 		$date = date('Y-m-d'); 
 		
 		if($this->input->post('date') != null) {
-			$date = $this->input->post('date');
+				$date = $this->input->post('date');
 		}
 
 
@@ -314,7 +323,7 @@ class User extends CI_Controller {
 		);
 
 		$where_username = array('username '=> $username);
-		$user = $this->Model_user->unique_check( $where_userame,"user");
+		$user = $this->Model_user->unique_check( $where_username,"user");
 
 		if ($user != 0)
 			redirect('tambah_user');
@@ -380,9 +389,23 @@ class User extends CI_Controller {
 
 	public function show_url()
 	{
-		$id = array('id_user'=> $this->session->userdata('id'));
-		$data['user'] = $this->Model_user->check($id,'url')->result();
+
+
+ 	   	$count = $this->Model_user->count_url();
+		
+		$config = $this->pagination();
+		$config['base_url'] = base_url('url');
 	
+		$config['total_rows'] = $count;
+		$this->pagination->initialize($config);
+	
+		$where = array('id_user' => $this->session->userdata('id'));
+		$data['from'] = $this->uri->segment(2);
+
+ 		$data['user'] =  
+		$this->Model_user->get_limit($config['per_page'],$data['from'],$where,"url")->result();
+	
+		
 		$this->load->view('admin_panel/header', $data, FALSE);
 		$this->load->view('admin_panel/side_bar', $data, FALSE);
 		$this->load->view('url/show', $data, FALSE);

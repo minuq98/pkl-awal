@@ -27,7 +27,14 @@
                   <?php if ($most_visited_mine == NULL) {
                         echo 'Anda belum pernah menambahkan url apapun';
                         ?>
-                  <a class="btn btn-primary " href="<?php echo base_url('tambah_url') ?>"> <i class="fas fa-plus"> </i>klik Untuk  Menambahkan Url</a> <?php } else { ?> 
+                  <a class="btn btn-primary " href="<?php echo base_url('tambah_url') ?>"> <i class="fas fa-plus"> </i>klik Untuk  Menambahkan Url</a> 
+                </div>
+            </div>
+          <!--/.Card-->
+        </div> 
+
+      </div>
+                <?php } else { ?> 
                      URL Teratas Anda
                      <span class="badge badge-primary">
                      <?php echo strtoupper($most_visited_mine->short_url)  ;?>

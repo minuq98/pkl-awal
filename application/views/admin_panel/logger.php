@@ -44,7 +44,9 @@
 			                     <th>Dibuat</th>
                            </tr>
                         </thead>
-		                   <?php $no = $page*5+1 ;
+		                   <?php
+
+                          $no =$page+1;
                         foreach($user as $u){ ?>
                         <tbody >
                            <tr >

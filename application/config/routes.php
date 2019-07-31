@@ -49,43 +49,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'home_page';
+$route['default_controller'] = 'Home_page';
 //admin
-$route['profil'] ='user/profile';
-$route['ganti_profil'] ='user/edit_profile';
-$route['ubah_profil'] ='user/update_profile/';
+$route['profil'] ='User/profile';
+$route['ganti_profil'] ='User/edit_profile';
+$route['ubah_profil'] ='User/update_profile/';
 
-$route['tampilkan_user'] ='user/show_user';
+$route['tampilkan_user'] ='User/show_user';
 
-$route['tampilkan_user/(:any)'] ='user/show_user/$1';
+$route['tampilkan_user/(:any)'] ='User/show_user/$1';
 
-$route['beranda_admin'] ='user/dashboard_admin';
-$route['tambah_user'] ='user/get_data_user';
-$route['aksi_user'] ='user/add_user';
-$route['ubah_user/(:num)'] ='user/edit_user/$1';
-$route['hapus_user/(:num)'] ='user/delete_user/$1';
-$route['ubah_user'] = 'user/update_user';
+$route['beranda_admin'] ='User/dashboard_admin';
+$route['tambah_user'] ='User/get_data_user';
+$route['aksi_user'] ='User/add_user';
+$route['ubah_user/(:num)'] ='User/edit_user/$1';
+$route['hapus_user/(:num)'] ='User/delete_user/$1';
+$route['ubah_user'] = 'User/update_user';
 
-$route['detail'] = 'user/detail';
-$route['detail/(:any)'] = 'user/detail/$1';
+$route['detail'] = 'User/detail';
+$route['detail/(:any)'] = 'User/detail/$1';
 
-$route['beranda_user'] ='user/dashboard_user';
-$route['url'] ='user/show_url';
-$route['url/(:num)'] ='user/show_url/$1';
-$route['tambah_url'] ='user/get_data_url';
-$route['aksi_url'] ='user/add_url';	
-$route['ubah_url/(:num)'] ='user/edit_url/$1';
-$route['hapus_url/(:num)'] = 'user/delete_url/$1';
-$route['ubah_url'] = 'user/update_url';
-$route['log'] = 'user/logger';
-$route['log/(:any)'] = 'user/logger/$1';
+$route['beranda_user'] ='User/dashboard_user';
+$route['url'] ='User/show_url';
+$route['url/(:num)'] ='User/show_url/$1';
+$route['tambah_url'] ='User/get_data_url';
+$route['aksi_url'] ='User/add_url';	
+$route['ubah_url/(:num)'] ='User/edit_url/$1';
+$route['hapus_url/(:num)'] = 'User/delete_url/$1';
+$route['ubah_url'] = 'User/update_url';
+$route['log'] = 'User/logger';
+$route['log/(:any)'] = 'User/logger/$1';
 
 //home_page
-$route['halo'] ='home_page/landing';
-$route['masuk'] ='home_page/login';
-$route['aksi'] ='home_page/action_login';
-$route['keluar'] ='home_page/logout';
-$route['redirect'] = 'home_page/redirect';
+$route['halo'] ='Home_page/landing';
+$route['masuk'] ='Home_page/login';
+$route['aksi'] ='Home_page/action_login';
+$route['keluar'] ='Home_page/logout';
+$route['redirect'] = 'Home_page/redirect';
 
 // require_once( BASEPATH .'database/DB'. EXT );
 // $db =& DB();
@@ -99,7 +99,7 @@ $route['redirect'] = 'home_page/redirect';
 //     $route[ $row->controller.'/:any' ]   = 'error404';
 // }
 
-$route['(:any)'] = 'home_page/shorturl/$1';
+$route['(:any)'] = 'Home_page/shorturl/$1';
 
 
 

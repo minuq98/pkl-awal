@@ -4,7 +4,7 @@
       <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/ringtone-music-instruments/512/letter-c-key-keyboard-2-512.png">
             <link rel="dns-prefetch" type="text/css" href="<?=  $url->url ; ?>">
 
-      <link rel="stylesheet" type="text/css" href="<?php echo base_url('') ;?>assets/css/my_custom/countDown.css">
+      <link rel="stylesheet" type="text/css" href="<?php echo base_url('') ;?>assets/css/my_custom/countdown.css">
       <title>CRUD</title>
    </head>
    <body>

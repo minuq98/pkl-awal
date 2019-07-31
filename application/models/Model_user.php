@@ -61,6 +61,12 @@ class Model_user extends CI_Model {
 	{
 		return $this->db->count_all_results('url');
 	}
+	function count_where($where,$table)
+	{
+		return $this->db->where($where)->count_all_results($table);		
+	}
+
+
 
 	function count_logger($key='')
 	{

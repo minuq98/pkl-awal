@@ -91,8 +91,8 @@
                     <td><?= $no++  ?></td>
                     <td><?= isset($row->ip)   ? $row->ip : "Empty Data" ?></td>
                     <td><?= isset($row->browser)  ? $row->browser : "Empty Data"?></td>
-                    <td><?= isset($row->version)  ? $row->ip : "Empty Data"?></td>
-                    <td><?= isset($row->platform)  ? $row->ip : "Empty Data"?></td>
+                    <td><?= isset($row->version)  ? $row->version : "Empty Data"?></td>
+                    <td><?= isset($row->platform)  ? $row->platform : "Empty Data"?></td>
                     
                   </tr>
                 </tbody>

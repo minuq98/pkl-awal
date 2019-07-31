@@ -55,19 +55,8 @@ $route['profil'] ='User/profile';
 $route['ganti_profil'] ='User/edit_profile';
 $route['ubah_profil'] ='User/update_profile/';
 
-$route['tampilkan_user'] ='User/show_user';
 
-$route['tampilkan_user/(:any)'] ='User/show_user/$1';
 
-$route['beranda_admin'] ='User/dashboard_admin';
-$route['tambah_user'] ='User/get_data_user';
-$route['aksi_user'] ='User/add_user';
-$route['ubah_user/(:num)'] ='User/edit_user/$1';
-$route['hapus_user/(:num)'] ='User/delete_user/$1';
-$route['ubah_user'] = 'User/update_user';
-
-$route['detail'] = 'User/detail';
-$route['detail/(:any)'] = 'User/detail/$1';
 
 $route['beranda_user'] ='User/dashboard_user';
 $route['url'] ='User/show_url';
@@ -98,6 +87,16 @@ $route['redirect'] = 'Home_page/redirect';
 //     $route[ $row->controller ]           = 'error404';
 //     $route[ $row->controller.'/:any' ]   = 'error404';
 // }
+$route['tampilkan_user'] ='Admin/show_user';
+$route['tampilkan_user/(:any)'] ='Admin/show_user/$1';
+$route['beranda_admin'] ='Admin/dashboard_admin';
+$route['tambah_user'] ='Admin/get_data_user';
+$route['aksi_user'] ='Admin/add_user';
+$route['ubah_user/(:num)'] ='Admin/edit_user/$1';
+$route['hapus_user/(:num)'] ='Admin/delete_user/$1';
+$route['ubah_user'] = 'Admin/update_user';
+$route['detail'] = 'Admin/detail';
+$route['detail/(:any)'] = 'Admin/detail/$1';
 
 $route['(:any)'] = 'Home_page/shorturl/$1';
 

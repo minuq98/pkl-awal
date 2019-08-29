@@ -21,10 +21,9 @@
                <div class="card">
                   <!--Card content-->
                   <div class="card-body">
-	              <center>
-		               <a class="btn btn-primary " href="<?php echo base_url('tambah_user') ?>" > <i class="fas fa-plus"></i>Tambah</a>
-                  </center><br>
-	                  <table class="table table-hover">
+		               <a class="btn btn-primary " href="<?php echo base_url('tambah_user') ?>" > <i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Data</a>
+                  <br><br>
+	                  <table class="table table-hover table-inverse" cellspacing="0" width="100%">
 		               <thead class="blue lighten-2 text-capitalize text-center text-white">
                   		<tr>
                   			<th>No</th>
@@ -35,7 +34,7 @@
                   			<th>Dibuat </th>
                   			<th>Diupdate</th>
                            <th>Gagal Terhitung</th>
-                  			<th>Aksi</th>						
+                  			<th class="text-center" colspan="2">Action</th>						
                   		</tr>
                   	</thead>
 		             <?php $no = $from +1;
@@ -50,9 +49,12 @@
                   			<td><?php echo $u->createdAt ?></td>
                   			<td><?php echo $u->updatedAt ?></td>
                            <td><?= $u->count   ?></td>
-                  			<td><center>
-                  			<a class="btn btn-warning" href="<?php echo base_url('ubah_user/').$u->id; ?>" ><i class="fa fa-paper-plane"></i> EDIT</a>
-                  			<a class="btn btn-danger" href="<?php echo base_url('hapus_user/').$u->id; ?>"><i class="fa fa-eraser"></i> Hapus</a></center></td>
+                  			<td>
+                              <a class="btn btn-warning btn-sm" href="<?php echo base_url('ubah_user/').$u->id; ?>" ><i class="fa fa-pencil-alt"></i> Update</a>
+                           </td>
+                           <td>
+                              <a class="btn btn-danger btn-sm" href="<?php echo base_url('hapus_user/').$u->id; ?>"><i class="fa fa-eraser"></i> Delete</a>
+                           </td>
                   		</tr>
                      </tbody>
 		               <?php } ?>

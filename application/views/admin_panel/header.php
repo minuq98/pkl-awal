@@ -17,6 +17,12 @@
   <link href="<?php echo base_url();?>assets/css/style.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/my_custom/map.css">
 
+  <style>
+    body {
+      font-family : "Segoe UI";
+    }
+  </style>
+
 
 </head>
 
@@ -28,7 +34,7 @@
       <div class="container-fluid">
         <!-- Brand -->
          <a class="navbar-brand waves-effect " href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-            <strong class="blue-text">CRUD AWAL</strong>
+            <strong class="blue-text">Shorten URL</strong>
          </a>
         <!-- Collapse -->
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

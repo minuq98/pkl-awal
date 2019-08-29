@@ -22,11 +22,10 @@
                <div class="card">
                   <!--Card content-->
                   <div class="card-body">
-                     <center>
-                     <a class="btn btn-primary " href="<?php echo base_url('tambah_url') ?>" > <i class="fas fa-plus"></i>Tambah</a>
-                     </center><br>
+                     <a class="btn btn-primary " href="<?php echo base_url('tambah_url') ?>" > <i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Tambah Data</a>
+                     <br><br>
                      <div class="data-simplebar">
-	                  <table id="url" class="table table-striped  table-sm " cellspacing="0" width="100%">
+	                  <table id="url" class="table table-hover table-inverse" cellspacing="0" width="100%">
                         <thead class="blue lighten-2 text-capitalize text-center text-white">
 				               <tr>
 			                     <th>No</th>
@@ -34,7 +33,7 @@
 			                     <th>Nama URL</th>
                      			<th>Akses</th>
                      			<th>Dibuat</th>
-                     			<th class="text-center">Action</th>  			
+                     			<th class="text-center" colspan="2">Action</th>  			
 		                     </tr>
 	                     </thead>
 		                  </tbody>
@@ -47,10 +46,10 @@
                      			<td><?php echo $u->hit ?></td>
                      			<td><?php echo $u->createdAt ?></td>
                      			<td>
-                     			<center>
                         			<a class="btn btn-warning" href="<?php echo base_url('ubah_url/').$u->id; ?>"><i class="fa fa-paper-plane"></i> EDIT</a>
-                        			<a class="btn btn-danger" href="<?php echo 'hapus_url/'.$u->id; ?>"><i class="fa fa-eraser"></i> Hapus</a>
-                              </center>
+                              </td>
+                              <td>
+                              <a class="btn btn-danger" href="<?php echo 'hapus_url/'.$u->id; ?>"><i class="fa fa-eraser"></i> Hapus</a>
                               </td>
 		                     </tr>
 		                  </tbody>

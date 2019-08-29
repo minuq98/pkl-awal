@@ -10,16 +10,7 @@
                   <span>/</span>
                   <span>Url</span>
                </h4>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-               <form class="d-flex justify-content-between" name="form_search" action="<?php echo base_url('log') ;?>">
-               <!-- Default input -->
-                  <input type="search" required name="key" class="form-control" id="basic-url" placeholder="Type Your Query" aria-describedby="basic-addon3">
-
-                  <button class="btn btn-primary btn-sm my-0 p" type="submit"  title="Search "><i class="fa fa-search"></i></button>
-               </form>
-               <form method="get" class="d-flex justify-content-end" action="<?php base_url('log') ;?>">
-                  <button class="btn btn-danger btn-sm my-0 p" type="submit" name="reset" value="reset" title="Reset Search Result"><i class="fa fa-times"></i></button>
-               </form>
+              
             </div>
          </div>
       <!-- Heading -->
@@ -33,6 +24,15 @@
 
                            </td>
                   <div class="card-body">
+                  <form class="d-flex justify-content-between" name="form_search" action="<?php echo base_url('log') ;?>">
+                  <!-- Default input -->
+                     <input type="search" required name="key" class="form-control form-control-lg" id="basic-url" placeholder="Type Your Query" aria-describedby="basic-addon3">
+                     <button class="btn btn-primary btn-sm my-0 p" type="submit"  title="Search "><i class="fa fa-search"></i></button>
+                  </form>
+                  <!-- <form method="get" class="d-flex justify-content-end" action="<?php base_url('log') ;?>">
+                     <button class="btn btn-danger btn-sm my-0 p" type="submit" name="reset" value="reset" title="Reset Search Result"><i class="fa fa-times"></i></button>
+                  </form> -->
+                  <br/>
                      <center>
                      <table class="table table-hover table-inverse ">
                         <thead class="blue lighten-2">
@@ -42,6 +42,7 @@
 			                     <th class="text-center">Data</th>
 			                     <th >Level</th>
 			                     <th>Dibuat</th>
+                              <!-- <th>Detail</th> -->
                            </tr>
                         </thead>
 		                   <?php
@@ -52,16 +53,12 @@
                            <tr >
 			                     <td ><?php echo $no++ ;?></td>
 			                     <td ><?php echo $u->title; ?></td>
-			                     <td ><?php echo $u->descript; ?>
-                              <br>    <!-- The Modal -->
-                             
-                              <button class="btn btn-outline-primary " style="
-                                        width: 30px;
-                                        height: 30px;
-                                        padding: 6px 0px;
-                                        border-radius: 15px;
-                                        line-height: 1.42857;
-                                "data-toggle="modal" data-target="#myModal"> <i class="fa fa-plus"> </i> </button>
+			                     <td ><?php echo $u->descript; ?> </td>
+                            <td><?php echo $u->type ;?></td>
+			                     <td><?php echo $u->createdAt ;?></td>
+                              <!-- The Modal -->
+                              <!-- <td>
+                              <button class="btn btn-outline-primary " data-toggle="modal" data-target="#myModal"> <i class="fa fa-info"> </i> </button>
                                       <div class="modal fade" id="myModal">
                                         <div class="modal-dialog modal-dialog-centered">
                                           <div class="modal-content">
@@ -83,8 +80,7 @@
                                           </div>
                                         </div>
                                       </div>
-                            <td><?php echo $u->type ;?></td>
-			                     <td><?php echo $u->createdAt ;?></td>
+                                    </td> -->
                            </tr>
                         </tbody>
 		                   <?php } if(count($user) == 0){  echo "<tr>";

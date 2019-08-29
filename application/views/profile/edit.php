@@ -26,40 +26,25 @@
                	<form action="<?php echo  base_url('ubah_profil');   ?>" method="post">
                	
                	<h1 class="h1 text-center" >Update User</h1><br>
-                  <div class="input-group mb-3">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">
-                           Nama Lengkap</span>
-                     </div>
-                     <input type="hidden" name="id" value="<?php echo $u->id ?>">
-                     <input type="text" name="nama" value="<?php echo $u->nama ?>">
+                  <div class="form-group mb-3">
+                     <label for="namaLengkap">Nama Lengkap</label>
+                        <input type="hidden" name="id" class="form-control" id="id" value="<?php echo $u->id ?>">
+                        <input type="text" name="nama" class="form-control" id="nama" value="<?php echo $u->nama ?>">
                   </div>
-
-                  <div class="input-group mb-3">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">
-                           Nama User</span>
-                     </div>
-  				         <input type="text" name="username" value="<?php echo $u->username ?>">
+                  <div class="form-group mb-3">
+                     <label for="namaUser">Nama User</label>
+                        <input type="text" class="form-control" name="username" value="<?php echo $u->username ?>">
                   </div>
-
-                  <div class="input-group mb-3">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Password User</span>
-                     </div>
-                     <input type="text" name="password">			
+                  <div class="form-group mb-3">
+                     <label for="namaUser">Email</label>
+                        <input type="email" name="email" class="form-control" value="<?php echo $u->email?>">
                   </div>
-
-                  <div class="input-group mb-3">
-                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Email User</span>
-                     </div>
-                     <input type="email" name="email" value="<?php echo $u->email?>">			
+                  <div class="form-group mb-3">
+                     <label for="namaUser">Password</label>
+                        <input type="text" name="password" class="form-control">
                   </div>
-			         <br>
-                  <center>
-			         <input class="btn btn-warning" type="submit" value="Simpan">
-               </form>	
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                  </form>	
 	           <?php } ?>
                </div>
             </div>
